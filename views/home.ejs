@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>Homepage</title>
+  <style>
+   .welcome-section {
+  background-color: white;
+  color: black;
+  padding: 40px 30px;
+  max-width: 700px;
+  margin: 40px 0 40px 30px; /* Top, Right, Bottom, Left */
+  border-radius: 10px;
+  font-family: Arial, sans-serif;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+  text-align: left;
+}
+.welcome-section h1 {
+  font-size: 40px;
+  margin: 10px 0;
+}
+
+.welcome-section h2 {
+  font-size: 24px;
+  font-weight: 500;
+  margin: 10px 0;
+}
+
+.welcome-section p {
+  font-size: 16px;
+  line-height: 1.7;
+  margin-top: 20px;
+  text-align: justify;
+}
+.intro-section {
+  background-color: white;
+  color: black;
+  padding: 40px 30px;
+  max-width: 700px;
+  margin: 40px 0 40px 30px; /* top, right, bottom, left */
+  border-radius: 10px;
+  font-family: Arial, sans-serif;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+  text-align: left;
+}
+
+.intro-section h1 {
+  font-size: 36px;
+  margin-bottom: 10px;
+}
+
+.intro-section h2 {
+  font-size: 24px;
+  font-weight: 500;
+  margin-bottom: 20px;
+}
+
+.intro-small {
+  font-size: 14px;
+  line-height: 1.6;
+  margin-bottom: 15px;
+  text-align: justify;
+}
+
+.intro-large {
+  font-size: 16px;
+  line-height: 1.8;
+  text-align: justify;
+}
+.stats-section {
+  background: url('https://images.unsplash.com/photo-1556740749-887f6717d7e4?fit=crop&w=1400&q=80') no-repeat center center/cover;
+  position: relative;
+  padding: 10px 20px;
+  color: white;
+}
+
+.overlay {
+  background-color: rgba(84, 48, 160, 0.8); /* Purple overlay */
+  padding: 30px 20px;
+  text-align: center;
+}
+
+.overlay h2 {
+  font-size: 36px;
+  font-weight: 600;
+  margin-bottom: 50px;
+}
+
+.stats-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+}
+
+.stat-box {
+  width: 180px;
+  text-align: center;
+}
+
+.icon-circle {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto 20px;
+  background-color: #eee;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-circle img {
+  width: 35px;
+  height: 35px;
+  filter: grayscale(100%) brightness(0.4);
+}
+
+.stat-box h3 {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: white;
+}
+
+.stat-box p {
+  font-size: 15px;
+  color: #f5f5f5;
+}
+.solutions-section {
+  text-align: center;
+  background: #f0f2f7;
+  padding: 60px 20px;
+}
+
+.card-container {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-bottom: 40px;
+  flex-wrap: wrap;
+}
+
+.solution-card {
+  width: 200px;
+  padding: 20px;
+  border-radius: 12px;
+  background: white;
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.solution-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
+
+.solution-card img {
+  width: 50px;
+  margin-bottom: 10px;
+}
+
+.solution-card p {
+  font-weight: bold;
+  color: #222;
+}
+
+.explanation-box {
+  display: none;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 30px;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.1);
+  text-align: justify;
+}
+
+  </style>
+</head>
+<body>
+  <%- include('partials/navbar') %>
+  <div class="welcome-section">
+  <h2>Welcome</h2>
+  <h1>to Oncall</h1>
+  <h2>Stay Connected with your Business at Anytime and Anywhere</h2>
+  <p>On Call offers reliable inbound and outbound call center services designed to keep your business running smoothly, even when you're not available.
+With our team of dedicated, multilingual agents, we ensure that every customer interaction is handled professionally and efficiently.
+We provide real-time monitoring tools and maintain comprehensive activity logs across all communication channels — 
+helping you stay in control, deliver exceptional service, and never miss an opportunity to engage with your customers.</p>
+  </div>
+  <div class="intro-section">
+  <h1>Our Introduction</h1>
+  <h2>Who we are</h2>
+  <p class="intro-small">
+    On call Contact center is a Business Process Outsourcing Service Provider offering customer experience management,
+    back office services, inside sales channel management, professional services and digital services.
+  </p>
+  <p class="intro-large">
+    On call Contact Center provides top-notch outsourcing and call center services by focusing on high-growth industries; 
+    mainly Technology & Consumer Electronics, Media & Communication, Fast Food, Insurance, Automotive, White Goods, 
+    Retail, Health care, Travel & Hospitality, E-commerce, Government & Public Service, Real Estate...among others.
+  </p>
+</div>
+<section class="stats-section">
+  <div class="overlay">
+    <h2>Interesting Facts About On Call</h2>
+    <div class="stats-container">
+      
+      <div class="stat-box">
+        <div class="icon-circle">
+          <img src="https://img.icons8.com/ios-filled/50/phone.png" alt="phone" />
+        </div>
+        <h3>4376</h3>
+        <p>Successful Rings</p>
+      </div>
+
+      <div class="stat-box">
+        <div class="icon-circle">
+          <img src="https://img.icons8.com/ios-filled/50/speech-bubble.png" alt="chat" />
+        </div>
+        <h3>4500</h3>
+        <p>Chat Stories</p>
+      </div>
+
+      <div class="stat-box">
+        <div class="icon-circle">
+          <img src="https://img.icons8.com/ios-filled/50/email.png" alt="email" />
+        </div>
+        <h3>2000</h3>
+        <p>Emails Dropped</p>
+      </div>
+
+      <div class="stat-box">
+        <div class="icon-circle">
+          <img src="https://img.icons8.com/ios-filled/50/user.png" alt="user" />
+        </div>
+        <h3>1489</h3>
+        <p>Social Swings</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+<div class="solutions-section">
+  <h4>We've Done Lot's Of Work, Let Check Some From Here</h4>
+  <h2>Solutions</h2>
+
+  <div class="card-container">
+    <div class="solution-card" onclick="showContent('cem')">
+      <img src="https://img.icons8.com/ios-filled/50/pie-chart--v1.png" alt="CEM" />
+      <p>Customer Experience<br>Management</p>
+    </div>
+
+    <div class="solution-card" onclick="showContent('bos')">
+      <img src="https://img.icons8.com/ios-filled/50/services.png" alt="Back Office" />
+      <p>Back Office Services</p>
+    </div>
+
+    <div class="solution-card" onclick="showContent('digital')">
+      <img src="https://img.icons8.com/ios-filled/50/chat.png" alt="Digital" />
+      <p>Digital service</p>
+    </div>
+  </div>
+
+  <!-- Explanation sections -->
+  <div class="explanation-box" id="cem">
+    <h3>Customer Experience Management</h3>
+    <p>On call contact center provides a variety of certified voice Customer Experience 
+    services that enhance your day to day performance in the various business processes in your organization.
+    On Call is your trusted outsourced partner in all your BPO and Customer Experience requirements.
+Customer service experience support Part of our main Customer Experience Solutions 
+to the Middle East allow you to maximize the lifetime value of each and
+every one of your customers by providing superior post-sales service 24 hours a day, 7 days a week.
+Improving your customer loyalty will enable you to maintain your customers and save the costs of acquiring new customers. 
+Customer excellence range from responding to your customer's inquiries and solving their problems, 
+up to maintaining high customer satisfaction rates through personalized outsourced solutions.</p>
+  </div>
+
+  <div class="explanation-box" id="bos">
+    <h3>Back Office Services</h3>
+    <p>On call Contact Center provides a variety of non-voice Contact Center and BPO Solutions that enhance the customer experience management along 
+    with your day to day interactions with your customers through a proven track record with our expertise in 
+    outsourcing solutions across all our sites in middle east.
+Data management We mainly focus on handling low to medium transactions, including the internal operational processes of all companies,
+by making a complete customization of the dashboard according to the requirements of each client. Other services also include data entry functions,
+direct conversations, email management, and WhatsApp requests for more than 8 languages.</p>
+  </div>
+
+  <div class="explanation-box" id="digital">
+    <h3>Digital Service</h3>
+    <p>We help our clients to get a comprehensive customer experience management, 
+    On Call enhances the integrated Omni-channel CX management Solutions For the Social Media Management technology, 
+    we give our clients the option to outsource their work with renowned technologies that give deep analysis their customers 
+    on social media conversations across multiple platforms including Facebook, Twitter, Instagram, LinkedIn, etc. 
+    and extends to virtually all public data on open blogs, forums, and micro websites, with the ability to flag the top influencers,
+    trending topics, sentiment analysis and a lot more including deep profiling of online communities that exceed the traditional demographic analysis.</p>
+  </div>
+</div>
+  <%- include('partials/footer') %>
+</body>
+</html>
+<script>
+function showContent(id) {
+  // Hide all explanation boxes
+  document.querySelectorAll('.explanation-box').forEach(box => box.style.display = 'none');
+
+  // Show the selected one
+  document.getElementById(id).style.display = 'block';
+}
+</script>

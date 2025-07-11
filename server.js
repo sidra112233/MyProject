@@ -13,7 +13,54 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.get('/', (req, res) => {
     res.render('home');
 });
+app.get('/about', (req, res) => {
+    res.render('about'); // about.ejs
+});
+app.get('/ecommerce', (req, res) => {
+    res.render('ecommerce'); // ecommerce.ejs
+});
 
+app.get('/government', (req, res) => {
+    res.render('government'); // government.ejs
+});
+
+app.get('/realestate', (req, res) => {
+    res.render('realestate'); // realestate.ejs
+});
+app.get('/medical', (req, res) => {
+    res.render('medical'); // medical.ejs
+});
+
+app.get('/fastfood', (req, res) => {
+    res.render('fastfood'); // fastfood.ejs
+});
+
+app.get('/travel', (req, res) => {
+    res.render('travel'); // travel.ejs
+});
+
+app.get('/facility', (req, res) => {
+    res.render('facility'); // facility.ejs
+});
+app.get('/services', (req, res) => {
+    res.render('services'); // services.ejs
+});
+
+app.get('/why', (req, res) => {
+    res.render('why'); // why.ejs
+});
+app.get('/inbound', (req, res) => {
+    res.render('inbound'); // inbound.ejs
+});
+app.get('/digital', (req, res) => {
+    res.render('digital'); // digital.ejs
+});
+app.get('/solutions', (req, res) => {
+    res.render('solutions'); // solutions.ejs
+});
+app.get('/contact', (req, res) => {
+    res.render('contact'); // contact.ejs
+});
 app.listen(PORT, () => {
     console.log(`Server is running at http://localhost:${PORT}`);
 });

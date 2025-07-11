@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ecommerce</title>
+    </head>
+  <style>
+   .welcome-section {
+  background-color: white;
+  color: black;
+  padding: 40px 30px;
+  max-width: 700px;
+  margin: 40px 0 40px 30px; /* Top, Right, Bottom, Left */
+  border-radius: 10px;
+  font-family: Arial, sans-serif;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+  text-align: left;
+}
+.welcome-section h1 {
+  font-size: 40px;
+  margin: 10px 0;
+}
+
+.welcome-section h2 {
+  font-size: 24px;
+  font-weight: 500;
+  margin: 10px 0;
+}
+
+.welcome-section p {
+  font-size: 16px;
+  line-height: 1.7;
+  margin-top: 20px;
+  text-align: justify;
+}
+</style>
+  <body>
+    <%- include('partials/navbar') %>
+  <div class="welcome-section">
+	<h1>Facility Management</h1>
+	<p>On call team has been working for years to serve service companies that provide building facilities
+	management services and building maintenance services, and we help business owners to evaluate their
+	maintenance staff and upgrade their companies to the highest level of service and obtain customer satisfaction by providing multiple services.<br>
+	Our facilities management services solutions are geared to On call, and we pride ourselves on solutions 
+	specifically designed to help our clients achieve a better return from every client interaction,
+	while ensuring the highest standards of quality and customer satisfaction with our clients' brands.</p>
+	<h2>Oncall provides multiple services as follows</h2>
+	<h3>Amendments and Cancellations<br>
+  Maintenance reservations<br>
+  Personalization program<br>
+  Tenant complaints for renovations<br>
+  Membership & Loyalty programs<br>
+  Complaints management<br>
+  Web, live chat and email support<br>
+  Dealing with back office support</h3>
+	</div>
+	 <%- include('partials/footer') %>
+  </body>
+</html>

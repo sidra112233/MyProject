@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Fast food</title>
+    </head>
+  <style>
+   .welcome-section {
+  background-color: white;
+  color: black;
+  padding: 40px 30px;
+  max-width: 700px;
+  margin: 40px 0 40px 30px; /* Top, Right, Bottom, Left */
+  border-radius: 10px;
+  font-family: Arial, sans-serif;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
+  text-align: left;
+}
+.welcome-section h1 {
+  font-size: 40px;
+  margin: 10px 0;
+}
+
+.welcome-section h2 {
+  font-size: 24px;
+  font-weight: 500;
+  margin: 10px 0;
+}
+
+.welcome-section p {
+  font-size: 16px;
+  line-height: 1.7;
+  margin-top: 20px;
+  text-align: justify;
+}
+</style>
+  <body>
+    <%- include('partials/navbar') %>
+  <div class="welcome-section">
+	<h1>Fast Food</h1>
+	<p>The global market for Fast Food has become increasingly competitive, 
+	and the companies that grow and excel in this business are the ones that are in tune with their customers’ needs.
+	Delivering a higher standard of quality customer service that your clients can depend on solidifies your 
+	position in this competitive market place.<br>
+	On call Contact Center offers a wide range of services across all areas of your business, 
+	to serve as your customer interaction point. On call offers campaign management services including promotion support,
+	order management, and delivery support, loyalty program handling, customer satisfaction index measurement as well as 
+	consumer care lines via voice, email, webchat, and social media monitoring and analytics.<br>
+	To help you reach your revenue and service goals while continually enhancing your client experience
+	through excellent customer service and optimization of costs to your business, we help you meet the industry challenges
+	in reaching your business goals while also leveraging your brand loyalty.</p>
+	</div>
+	 <%- include('partials/footer') %>
+  </body>
+</html>

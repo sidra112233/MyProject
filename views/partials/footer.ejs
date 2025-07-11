@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    .footer {
+      background-color: #ffffff;
+      color: #000000;
+      padding: 40px 30px 20px;
+      font-family: Arial, sans-serif;
+    }
+
+    .footer-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 40px;
+    }
+
+    .footer-column {
+      flex: 1;
+      min-width: 220px;
+    }
+
+    .footer-column h3 {
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+    .footer-column a {
+      display: block;
+      text-decoration: none;
+      color: #000;
+      margin-bottom: 10px;
+      font-size: 14px;
+    }
+
+    .footer-column a:hover {
+      color: #e6005c;
+    }
+
+    .footer-logo img {
+      width: 160px;
+      margin-bottom: 20px;
+    }
+
+    .footer-contact p {
+      margin: 10px 0;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+    }
+
+    .footer-contact p i {
+      margin-right: 10px;
+      color: #e6005c;
+    }
+
+    .social-icons i {
+      font-size: 18px;
+      margin-right: 15px;
+      color: #000;
+      cursor: pointer;
+    }
+
+    .social-icons i:hover {
+      color: #e6005c;
+    }
+
+    .payment-icons img {
+      height: 30px;
+      margin-right: 10px;
+      margin-top: 10px;
+    }
+
+    .footer-bottom {
+      margin-top: 30px;
+      border-top: 1px solid #ccc;
+      padding-top: 15px;
+      font-size: 14px;
+      text-align: center;
+    }
+
+    @media (max-width: 768px) {
+      .footer-container {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+
+  <!-- Font Awesome CDN for icons -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  />
+</head>
+<body>
+
+  <footer class="footer">
+    <div class="footer-container">
+      <!-- Column 1: Logo and contact -->
+      <div class="footer-column">
+        <div class="footer-logo">
+          <img src="https://via.placeholder.com/150x40?text=OnCall" alt="Company Logo" />
+        </div>
+        <div class="footer-contact">
+          <p><i class="fas fa-map-marker-alt"></i> Main Office: Oasis Mall Second Floor Sheikh Zayed Road Al Quoz 1 Dubai</p>
+          <p><i class="fas fa-map-marker-alt"></i> Sharjah Branch: 1206, Al Ghanem Business Centre, Al Majaz 3, Sharjah</p>
+          <p><i class="fas fa-phone"></i> 0097143782000 / 600 547770</p>
+          <p><i class="fas fa-phone"></i> Sharjah: 0097165347742</p>
+          <p><i class="fas fa-envelope"></i> info@on-call.ae</p>
+        </div>
+      </div>
+
+      <!-- Column 2: Links -->
+      <div class="footer-column">
+        <h3>Links</h3>
+        <a href="#">About Us</a>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms and Conditions</a>
+        <a href="#">Refund and Cancellation</a>
+        <a href="#">Fair Usage</a>
+      </div>
+
+      <!-- Column 3: Support & Social -->
+      <div class="footer-column">
+        <h3>Support</h3>
+        <a href="#">Request A Demo</a>
+        <a href="#">Free Trial</a>
+        <a href="#">Login</a>
+        <a href="#">Contact Us</a>
+        <div class="social-icons" style="margin-top: 20px;">
+          <i class="fab fa-facebook-f"></i>
+          <i class="fab fa-twitter"></i>
+          <i class="fab fa-linkedin-in"></i>
+          <i class="fab fa-youtube"></i>
+          <i class="fab fa-instagram"></i>
+        </div>
+        <div class="payment-icons">
+          <img src="https://via.placeholder.com/60x30?text=VISA" alt="VISA" />
+          <img src="https://via.placeholder.com/60x30?text=MasterCard" alt="MasterCard" />
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      Copyright © on-call.ae
+    </div>
+  </footer>
+
+</body>
+</html>

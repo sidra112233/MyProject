@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Real Estate</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #fff;
+    }
+
+    /* ? Navbar container */
+    .navbar {
+      background-color: #ffffff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 30px;
+      flex-wrap: wrap;
+    }
+
+    /* ? Company name/logo on the left */
+    .navbar-left {
+      font-size: 20px;
+      font-weight: bold;
+      color: #e6005c;
+    }
+
+    /* ? Navigation links on the right */
+    .navbar-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .navbar-right a,
+    .dropbtn {
+      color: #000;
+      text-decoration: none;
+      padding: 10px 16px;
+      font-size: 16px;
+      background: none;
+      border: none;
+      cursor: pointer;
+    }
+
+    .navbar-right a:hover,
+    .dropdown:hover .dropbtn {
+      background-color: #f0f0f0;
+      border-radius: 4px;
+    }
+
+    .dropdown {
+      position: relative;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      top: 42px;
+      left: 0;
+      background-color: #ffffff;
+      min-width: 180px;
+      box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+      z-index: 1;
+    }
+
+    .dropdown-content a {
+      display: block;
+      padding: 10px 14px;
+      color: #000;
+      text-decoration: none;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #f5f5f5;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+    
+    /* ? Responsive Navbar */
+    @media (max-width: 768px) {
+      .navbar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .navbar-right {
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 10px;
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ? Navbar -->
+  <nav class="navbar">
+    <div class="navbar-left">
+      MyCompany
+      <!-- Replace with <img src="logo.png" alt="Logo"> for image logo -->
+    </div>
+    <div class="navbar-right">
+      <a href="/about">About us</a>
+      <a href="/why">Why us</a>
+      <a href="/solutions">Solutions</a>
+      
+      <div class="dropdown">
+        <button class="dropbtn">Industries</button>
+        <div class="dropdown-content">
+          <a href="/ecommerce">Ecommerce</a>
+          <a href="/government">Government & Public Services</a>
+          <a href="/realestate">Real Estate</a>
+          <a href="/medical">Medical Services</a>
+          <a href="/fastfood">Fast Food</a>
+          <a href="/travel">Travel & Tourism</a>
+          <a href="/facility">Facility Management</a>
+        </div>
+      </div>
+
+      <div class="dropdown">
+        <button class="dropbtn">Packages</button>
+        <div class="dropdown-content">
+          <a href="/inbound">Inbound Calls</a>
+          <a href="/digital">Digital</a>
+        </div>
+      </div>
+
+      <a href="/contact">Contact</a>
+    </div>
+  </nav>
+  </body>
+  </html>
