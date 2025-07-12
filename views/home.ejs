@@ -3,81 +3,144 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
   <title>Homepage</title>
   <style>
    .welcome-section {
+  display: flex;
+  gap: 30px;
+  padding: 40px 30px;
+  max-width: 1200px;
+  margin: 40px auto;
+  border-radius: 10px;
   background-color: white;
   color: black;
-  padding: 40px 30px;
-  max-width: 700px;
-  margin: 40px 0 40px 30px; /* Top, Right, Bottom, Left */
-  border-radius: 10px;
-  font-family: Arial, sans-serif;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
-  text-align: left;
-}
-.welcome-section h1 {
-  font-size: 40px;
-  margin: 10px 0;
+  flex-wrap: wrap;
 }
 
-.welcome-section h2 {
-  font-size: 24px;
-  font-weight: 500;
-  margin: 10px 0;
+.welcome-text {
+  flex: 1;
+  min-width: 300px;
 }
 
-.welcome-section p {
+.welcome-video {
+  flex: 1;
+  min-width: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.welcome-text h1,
+.welcome-text h2 {
+  margin-top: 0;
+}
+
+.welcome-text p {
   font-size: 16px;
   line-height: 1.7;
-  margin-top: 20px;
   text-align: justify;
 }
-.intro-section {
-  background-color: white;
-  color: black;
+.intro-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 30px;
+  flex-wrap: wrap; /* for mobile responsiveness */
   padding: 40px 30px;
-  max-width: 700px;
-  margin: 40px 0 40px 30px; /* top, right, bottom, left */
+  max-width: 1200px;
+  margin: auto;
+}
+
+.intro-section {
+  flex: 1;
+  min-width: 300px;
+}
+
+.intro-img {
+  flex: 1;
+  min-width: 200px;
+  text-align: center;
+}
+.intro-img img {
+  width: 100%;
+  max-width: auto;
+  max-height: auto; /* Decrease height here */
+  object-fit: cover; /* Keeps image clean while cropping if needed */
   border-radius: 10px;
-  font-family: Arial, sans-serif;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.05);
-  text-align: left;
 }
 
-.intro-section h1 {
-  font-size: 36px;
-  margin-bottom: 10px;
-}
 
-.intro-section h2 {
-  font-size: 24px;
-  font-weight: 500;
-  margin-bottom: 20px;
-}
-
-.intro-small {
-  font-size: 14px;
-  line-height: 1.6;
-  margin-bottom: 15px;
-  text-align: justify;
-}
-
+.intro-small,
 .intro-large {
   font-size: 16px;
-  line-height: 1.8;
+  line-height: 1.6;
   text-align: justify;
 }
+
+.dashboard-section {
+  background: #f3f3f3;
+  padding: 60px 0;
+}
+.dash-wrapper {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex;
+  background: #fff;
+}
+.dash-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.dash-img {
+  flex: 1;
+  min-width: 350px;
+}
+.dash-lines {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px;
+  gap: 10px;
+  cursor: pointer;
+}
+.line {
+  width: 4px;
+  height: 24px;
+  border-radius: 2px;
+}
+.blue-dark { background: #002d72; }
+.green     { background: #00a64f; }
+
+.dash-content {
+  flex: 2;
+  padding: 50px;
+}
+.section {
+  display: none;
+}
+.section.active {
+  display: block;
+}
+
+/* Responsive (optional) */
+@media (max-width: 768px) {
+  .dash-wrapper { flex-direction: column; }
+  .dash-lines { flex-direction: row; padding: 20px 0; }
+  .line { height: 4px; width: 24px; }
+}
+
 .stats-section {
-  background: url('https://images.unsplash.com/photo-1556740749-887f6717d7e4?fit=crop&w=1400&q=80') no-repeat center center/cover;
+  background:white no-repeat center center/cover;
   position: relative;
   padding: 10px 20px;
   color: white;
 }
 
 .overlay {
-  background-color: rgba(84, 48, 160, 0.8); /* Purple overlay */
+  background-color:white /* Purple overlay */
   padding: 30px 20px;
   text-align: center;
 }
@@ -86,6 +149,7 @@
   font-size: 36px;
   font-weight: 600;
   margin-bottom: 50px;
+  color: black;
 }
 
 .stats-container {
@@ -121,16 +185,16 @@
   font-size: 28px;
   font-weight: bold;
   margin-bottom: 5px;
-  color: white;
+  color: black;
 }
 
 .stat-box p {
   font-size: 15px;
-  color: #f5f5f5;
+  color: black;
 }
 .solutions-section {
   text-align: center;
-  background: #f0f2f7;
+  background: white;
   padding: 60px 20px;
 }
 
@@ -177,33 +241,55 @@
   box-shadow: 0 0 20px rgba(0,0,0,0.1);
   text-align: justify;
 }
+html {
+  scroll-behavior: smooth;
+}
 
   </style>
 </head>
 <body>
   <%- include('partials/navbar') %>
-  <div class="welcome-section">
-  <h2>Welcome</h2>
-  <h1>to Oncall</h1>
-  <h2>Stay Connected with your Business at Anytime and Anywhere</h2>
-  <p>On Call offers reliable inbound and outbound call center services designed to keep your business running smoothly, even when you're not available.
-With our team of dedicated, multilingual agents, we ensure that every customer interaction is handled professionally and efficiently.
-We provide real-time monitoring tools and maintain comprehensive activity logs across all communication channels — 
-helping you stay in control, deliver exceptional service, and never miss an opportunity to engage with your customers.</p>
+  <%- include('partials/chatbot') %>
+ <div class="welcome-section">
+  <div class="welcome-text">
+    <h2>Welcome</h2>
+    <h1>to Oncall</h1>
+    <h2>Stay Connected with your Business at Anytime and Anywhere</h2>
+    <p>
+      On Call offers reliable inbound and outbound call center services designed to keep your business running smoothly, even when you're not available.
+      With our team of dedicated, multilingual agents, we ensure that every customer interaction is handled professionally and efficiently.
+      We provide real-time monitoring tools and maintain comprehensive activity logs across all communication channels — 
+      helping you stay in control, deliver exceptional service, and never miss an opportunity to engage with your customers.
+    </p>
   </div>
-  <div class="intro-section">
-  <h1>Our Introduction</h1>
-  <h2>Who we are</h2>
-  <p class="intro-small">
-    On call Contact center is a Business Process Outsourcing Service Provider offering customer experience management,
-    back office services, inside sales channel management, professional services and digital services.
-  </p>
-  <p class="intro-large">
-    On call Contact Center provides top-notch outsourcing and call center services by focusing on high-growth industries; 
-    mainly Technology & Consumer Electronics, Media & Communication, Fast Food, Insurance, Automotive, White Goods, 
-    Retail, Health care, Travel & Hospitality, E-commerce, Government & Public Service, Real Estate...among others.
-  </p>
+
+  <div class="welcome-video">
+    <video controls width="100%" height="auto">
+      <source src="images/video.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+  </div>
 </div>
+<div class="intro-wrapper">
+  <div class="intro-section">
+    <h1>Our Introduction</h1>
+    <h2>Who we are</h2>
+    <p class="intro-small">
+      On call Contact center is a Business Process Outsourcing Service Provider offering customer experience management,
+      back office services, inside sales channel management, professional services and digital services.
+    </p>
+    <p class="intro-large">
+      On call Contact Center provides top-notch outsourcing and call center services by focusing on high-growth industries; 
+      mainly Technology & Consumer Electronics, Media & Communication, Fast Food, Insurance, Automotive, White Goods, 
+      Retail, Health care, Travel & Hospitality, E-commerce, Government & Public Service, Real Estate...among others.
+    </p>
+  </div>
+
+  <div class="intro-img">
+    <img src="images/about-1.png" alt="introduction" />
+  </div>
+</div>
+
 <section class="stats-section">
   <div class="overlay">
     <h2>Interesting Facts About On Call</h2>
@@ -244,7 +330,94 @@ helping you stay in control, deliver exceptional service, and never miss an oppo
     </div>
   </div>
 </section>
-<div class="solutions-section">
+<section class="dashboard-section">
+  <div class="dash-wrapper">
+
+    <!-- Left: Image -->
+    <div class="dash-img">
+      <img src="images/client-img.jpg" alt="Experience Hub" />
+    </div>
+
+    <!-- Middle: Clickable Colored Lines -->
+    <div class="dash-lines">
+      <div class="line blue-dark" onclick="showSection('why')"></div>
+      <div class="line green" onclick="showSection('dashboard')"></div>
+      <div class="line blue-dark" onclick="showSection('extra')"></div>
+      <div class="line green" onclick="showSection('extra1')"></div>
+    </div>
+
+    <!-- Right: Dynamic Content Area -->
+    <div class="dash-content">
+      <div id="why" class="section active">
+        <h2>Why Us</h2>
+      <h3>Get it All in One Place</h3>
+      <p>
+        This portal is an all-in-one workspace platform that is a fully comprehensive suite for your business.
+        It has the capability to handle all forms of communication which includes voice, video, chat, email,
+        social media, SMS, fax and more. The elegance and simplicity of the suite of services means the happiness
+        officers can provide proactive, personalized service and deeper engagement with each customer regardless
+        of the channel.
+      </p>
+      <p class="quote">?? <strong>ON CALL</strong> is here to help you out.</p>
+      </div>
+
+      <div id="dashboard" class="section">
+        <h2>Oncall Dashboard</h2>
+       <p>
+        We designed the dashboard because it is a seamless interface that provides customers with instant,
+        actionable information, real?time data, and basic insights for the customer to help him follow his
+        business from anywhere.
+      </p>
+
+      <p>
+        Only through the phone can he see the recorded calls, evaluate employees, assess the size of his business,
+        and at any time he can get a call center in all languages, and more than one call service that can get trained
+        and qualified agents to work with high professionalism and appropriate amounts in the market 24/7.
+      </p>
+      </div>
+
+      <div id="extra" class="section">
+       <b>Real time call analytics</b>
+	<p>Gain access to real time insight on your customer calls with a comprehensive dashboard, 
+    with metrics such as peak call times, frequent enquiries and orders, new vs returning callers and conversation topics.</p>
+	<b>Active call monitoring</b>
+	<p>Gain the ability to actively listen to recordings, view text transcripts and understand the subject
+    of the call, whether it’s a generic call, sales inquiry or even a dropped call.</p>
+	<b>Customizable Scripts</b>
+	<p>Seamlessly create and edit your questions on the go, and adapt your responses or scripts in in line 
+     with your business requirements.</p>
+      </div>
+       <div id="extra1" class="section">
+      <p>
+							<b>Try On call for free:</b>
+							Try On call for a limited time to find a package best suited for your business.						</p>
+						
+						<p>
+							<b>24x7 Call Operators:</b>
+							Catch all your leads, enquiries, orders and customer complaints, all day, every day.						</p>
+						
+						<p>
+							<b>Multilingual Agents:</b>
+							Catch all your leads, enquiries, orders and customer complaints, all day, every day.						</p>
+						
+						<p>
+							<b>Customizable admin dashboard:</b>
+							Choose or edit your scripts, language preferences, office timings and much more.						</p>
+						
+						<p>
+							<b>Instant Notification:</b>
+							Monitor calls and get notifications integrated in a comprehensive reporting system.						</p>
+						
+						<p>
+							<b>Quick and hassle free set-up:</b>
+							No assembly or hardware installations - just sign up and sign in.						</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<div class="solutions-section" id="solutions">
   <h4>We've Done Lot's Of Work, Let Check Some From Here</h4>
   <h2>Solutions</h2>
 
@@ -310,4 +483,13 @@ function showContent(id) {
   // Show the selected one
   document.getElementById(id).style.display = 'block';
 }
+function showSection(id) {
+    // Hide all sections
+    document.querySelectorAll('.section').forEach(section => {
+      section.classList.remove('active');
+    });
+
+    // Show the selected section
+    document.getElementById(id).classList.add('active');
+  }
 </script>

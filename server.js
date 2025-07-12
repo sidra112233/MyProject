@@ -55,9 +55,7 @@ app.get('/inbound', (req, res) => {
 app.get('/digital', (req, res) => {
     res.render('digital'); // digital.ejs
 });
-app.get('/solutions', (req, res) => {
-    res.render('solutions'); // solutions.ejs
-});
+
 app.get('/contact', (req, res) => {
     res.render('contact'); // contact.ejs
 });

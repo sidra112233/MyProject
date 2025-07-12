@@ -29,6 +29,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Content Include="views\about.ejs" />
+    <Content Include="views\chatbot.ejs" />
     <Content Include="views\digital.ejs" />
     <Content Include="views\government.ejs" />
     <Content Include="views\inbound.ejs" />
