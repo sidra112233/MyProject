@@ -1,159 +1,169 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <style>
-/* Chat Toggle Button */
-#chat-toggle {
-  position: fixed;
-  bottom: 20px;
-  right: 20px;
-  background-color: #e6005c;
-  color: white;
-  font-size: 24px;
-  padding: 15px;
-  border-radius: 50%;
-  cursor: pointer;
-  z-index: 999;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Ibex?style Chat</title>
+<link rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+:root{
+  --pink:#ff006e;      /* launcher / accent */
+  --navy:#070430;      /* header */
+  --bg:#f6e6f4;        /* body background */
+  --bubble:#ffffff;    /* quick question btn */
 }
 
-/* Chatbox */
-#chatbox {
-  display: none;
-  flex-direction: column;
-  position: fixed;
-  bottom: 80px;
-  right: 20px;
-  width: 300px;
-  max-height: 400px;
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-  overflow: hidden;
-  z-index: 999;
+/* ------------ launcher button -------------- */
+#chat-toggle{
+  position:fixed;bottom:25px;right:25px;
+  width:60px;height:60px;border-radius:50%;
+  background:var(--pink);color:#fff;font-size:30px;
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;z-index:1000;box-shadow:0 4px 14px rgba(0,0,0,.25);
 }
 
-/* Chat Header */
-.chat-header {
-  background: #e6005c;
-  color: white;
-  padding: 12px;
-  font-size: 16px;
-  font-weight: bold;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+/* ------------ chat panel -------------- */
+#chatbox{
+  display:none;flex-direction:column;
+  position:fixed;bottom:95px;right:20px;
+  width:350px;height:600px;
+  background:#fff;border-radius:26px 26px 18px 18px;
+  box-shadow:0 10px 30px rgba(0,0,0,.35);
+  overflow:hidden;z-index:999;
+  animation:puff .3s ease;
 }
+@keyframes puff{from{transform:scale(.8);opacity:0}to{transform:scale(1);opacity:1}}
 
-.chat-close {
-  cursor: pointer;
-  font-size: 20px;
+/* top bar with notch */
+.chat-header{
+  background:var(--navy);
+  height:80px;position:relative;color:#fff;
+  display:flex;align-items:center;justify-content:flex-end;
+  padding:0 18px;gap:18px;font-size:18px;
 }
+.chat-header::after{               /* little notch */
+  content:"";position:absolute;bottom:-12px;left:50%;
+  transform:translateX(-50%) rotate(180deg);
+  width:32px;height:24px;
+  background:var(--navy);clip-path:polygon(0 0,100% 0,50% 100%);
+}
+.chat-header i{cursor:pointer}
 
-/* Chat Body */
-.chat-body {
-  flex: 1;
-  padding: 10px;
-  overflow-y: auto;
-  background: #f9f9f9;
+/* avatar & greeting */
+.chat-top{
+  text-align:center;padding:60px 25px 25px;background:linear-gradient(#fff 0,var(--bg) 100%);
 }
+.chat-top img{
+  width:110px;height:110px;border-radius:50%;object-fit:cover;
+  border:6px solid #fff;box-shadow:0 0 0 4px var(--bg);
+}
+.chat-top h4{margin:18px 0 8px;font-size:20px;font-weight:700;color:#333}
+.chat-top p{margin:0;font-size:14px;color:#444}
 
-.bot-message, .user-message {
-  margin-bottom: 10px;
-  padding: 8px 12px;
-  border-radius: 6px;
-  max-width: 80%;
-  font-size: 14px;
-}
+/* quick question buttons */
+.quick-btn{display:flex;align-items:center;justify-content:space-between;
+  background:var(--bubble);border:none;border-radius:16px;padding:14px 18px;
+  width:100%;font-size:15px;font-weight:600;color:#000;margin:10px 0;cursor:pointer}
+.quick-btn i{background:rgba(255,0,110,.15);color:var(--pink);
+  width:38px;height:38px;display:flex;align-items:center;justify-content:center;
+  border-radius:50%;font-size:18px}
 
-.bot-message {
-  background: #ececec;
-  color: #333;
-  align-self: flex-start;
-}
+/* scrollable thread */
+.chat-body{flex:1;overflow-y:auto;padding:0 20px;background:var(--bg)}
+.user-message,.bot-message{
+  max-width:80%;margin:10px 0;padding:10px 14px;border-radius:12px;font-size:14px}
+.user-message{background:var(--pink);color:#fff;margin-left:auto}
+.bot-message{background:#fff;color:#222}
 
-.user-message {
-  background: #e6005c;
-  color: white;
-  align-self: flex-end;
-}
+/* input row */
+.chat-input{
+  background:var(--bg);padding:12px;display:flex;gap:10px;
+  align-items:center;border-top:1px solid #e2cfe1;font-size:14px}
+.chat-input input{
+  flex:1;border:none;padding:10px 14px;border-radius:22px;font-size:14px;
+  outline:none}
+.chat-input button{
+  width:44px;height:44px;border-radius:50%;border:none;
+  background:var(--navy);color:#fff;font-size:18px;cursor:pointer}
 
-/* Chat Input */
-.chat-input {
-  display: flex;
-  border-top: 1px solid #ccc;
-}
-
-.chat-input input {
-  flex: 1;
-  border: none;
-  padding: 10px;
-  font-size: 14px;
-  outline: none;
-}
-
-.chat-input button {
-  border: none;
-  padding: 10px 15px;
-  background: #e6005c;
-  color: white;
-  cursor: pointer;
-}
 </style>
+</head>
 <body>
-<!-- Chat Launcher Button -->
-<div id="chat-toggle" onclick="toggleChatbox()">??</div>
 
-<!-- Chatbox Panel -->
+<!-- launcher -->
+<div id="chat-toggle"><i class="fas fa-comment"></i></div>
+
+<!-- panel -->
 <div id="chatbox">
   <div class="chat-header">
-    Chat With Us
-    <span onclick="toggleChatbox()" class="chat-close">&times;</span>
+    <i class="fas fa-rotate-right" title="Reset"></i>
+    <i class="fas fa-maximize" title="Expand"></i>
   </div>
-  <div class="chat-body" id="chat-body">
-    <div class="bot-message">Hello! How can we help you today?</div>
+
+  <div class="chat-top">
+    <img src="https://i.imgur.com/LSX6pUu.png" alt="bot">
+    <h4>Hi there!</h4>
+    <p>If you have questions about Oncall, I can help!</p>
+
+    <!-- quick questions -->
+    <button class="quick-btn" onclick="quickAsk('How is Oncall different from other BPOs?')">
+      How is Oncall different from other BPOs?
+      <i class="fas fa-globe"></i>
+    </button>
+    <button class="quick-btn" onclick="quickAsk('How are you using AI to improve CX?')">
+      How are you using AI to improve CX?
+      <i class="fas fa-star"></i>
+    </button>
+    <button class="quick-btn" onclick="quickAsk('How can Oncall help elevate my CX KPIs?')">
+      How can Oncall help elevate my CX KPIs?
+      <i class="fas fa-chart-bar"></i>
+    </button>
+    <button class="quick-btn" onclick="quickAsk('Is Oncall hiring?')">
+      Is Oncall hiring?
+      <i class="fas fa-user"></i>
+    </button>
   </div>
+
+  <!-- messages area -->
+  <div class="chat-body" id="chat-body"></div>
+
+  <!-- input -->
   <div class="chat-input">
-    <input type="text" id="user-input" placeholder="Type your message..." />
-    <button onclick="sendMessage()">Send</button>
+    <input id="user-input" placeholder="Type your question here" />
+    <button onclick="sendMsg()"><i class="fas fa-paper-plane"></i></button>
   </div>
 </div>
+
+<script>
+/* open / close ---------------------------------------------------*/
+const toggle = document.getElementById('chat-toggle');
+const chat   = document.getElementById('chatbox');
+toggle.onclick = ()=> chat.style.display = chat.style.display==='flex'?'none':'flex';
+
+/* quick buttons --------------------------------------------------*/
+function quickAsk(txt){ document.getElementById('user-input').value = txt; sendMsg(); }
+
+/* send / append --------------------------------------------------*/
+function sendMsg(){
+  const input = document.getElementById('user-input');
+  const text  = input.value.trim();
+  if(!text) return;
+  appendBubble(text,'user');
+  input.value='';
+  setTimeout(()=>appendBubble(mockReply(text),'bot'),600);
+}
+
+function appendBubble(msg,type){
+  const div=document.createElement('div');
+  div.className = type==='user'?'user-message':'bot-message';
+  div.textContent = msg;
+  document.getElementById('chat-body').appendChild(div);
+  document.getElementById('chat-body').scrollTop = document.getElementById('chat-body').scrollHeight;
+}
+
+/* simulated answer ----------------------------------------------*/
+function mockReply(q){ return "We're processing your question: \""+q+"\". An agent will reply soon."; }
+</script>
 </body>
 </html>
-<script>
-  function toggleChatbox() {
-    const chatbox = document.getElementById("chatbox");
-    const isOpen = chatbox.style.display === "flex";
-    chatbox.style.display = isOpen ? "none" : "flex";
-  }
-
-  function sendMessage() {
-    const input = document.getElementById("user-input");
-    const chatBody = document.getElementById("chat-body");
-    const message = input.value.trim();
-
-    if (!message) return;
-
-    // Add user message
-    const userMsg = document.createElement("div");
-    userMsg.className = "user-message";
-    userMsg.textContent = message;
-    chatBody.appendChild(userMsg);
-
-    input.value = "";
-
-    // Scroll to bottom
-    chatBody.scrollTop = chatBody.scrollHeight;
-
-    // Simulated bot response
-    setTimeout(() => {
-      const botMsg = document.createElement("div");
-      botMsg.className = "bot-message";
-      botMsg.textContent = "Thanks for your message! We'll get back to you shortly.";
-      chatBody.appendChild(botMsg);
-      chatBody.scrollTop = chatBody.scrollHeight;
-    }, 700);
-  }
-</script>

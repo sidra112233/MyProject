@@ -22,15 +22,61 @@
   flex: 1;
   min-width: 300px;
 }
+.video-thumbnail-container {
+      position: relative;
+      width: 300px;
+      margin: 50px auto;
+      cursor: pointer;
+    }
 
-.welcome-video {
-  flex: 1;
-  min-width: 300px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+    .video-thumbnail-container img {
+      width: 100%;
+      border-radius: 10px;
+      display: block;
+    }
 
+    .play-button {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(0, 0, 0, 0.6);
+      color: white;
+      border: none;
+      font-size: 32px;
+      padding: 15px 20px;
+      border-radius: 50%;
+      cursor: pointer;
+    }
+
+    /* Fullscreen video modal */
+    .video-modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0,0,0,0.9);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .video-modal video {
+      width: 90%;
+      max-width: 800px;
+      border: 4px solid white;
+      border-radius: 10px;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 20px; right: 30px;
+      font-size: 32px;
+      color: white;
+      cursor: pointer;
+      font-weight: bold;
+    }
 .welcome-text h1,
 .welcome-text h2 {
   margin-top: 0;
@@ -63,11 +109,9 @@
   text-align: center;
 }
 .intro-img img {
-  width: 100%;
-  max-width: auto;
-  max-height: auto; /* Decrease height here */
-  object-fit: cover; /* Keeps image clean while cropping if needed */
-  border-radius: 10px;
+   position: relative;
+      width: 300px;
+      margin: 50px auto;
 }
 
 
@@ -193,54 +237,77 @@
   color: black;
 }
 .solutions-section {
+  padding: 40px 20px;
+  max-width: 1200px;
+  margin: auto;
   text-align: center;
-  background: white;
-  padding: 60px 20px;
 }
 
 .card-container {
   display: flex;
   justify-content: center;
-  gap: 30px;
-  margin-bottom: 40px;
+  gap: 20px;
   flex-wrap: wrap;
+  margin-bottom: 30px;
 }
 
 .solution-card {
-  width: 200px;
+  background: #f3f3f3;
   padding: 20px;
-  border-radius: 12px;
-  background: white;
-  box-shadow: 0 0 15px rgba(0,0,0,0.1);
+  width: 200px;
+  text-align: center;
   cursor: pointer;
-  transition: 0.3s;
+  border-radius: 10px;
+  transition: transform 0.2s ease;
 }
 
 .solution-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+  transform: scale(1.05);
+  background-color: #ffeaf3;
 }
 
-.solution-card img {
-  width: 50px;
+.explanation-wrapper {
+  width: 100%;
+}
+
+.explanation-content {
+  display: flex;
+  gap: 30px;
+  align-items: flex-start;
+  margin-bottom: 20px;
+  text-align:justify;
+}
+
+.explanation-image img {
+  width: 250px;
+  height: auto;
+  border-radius: 10px;
+}
+
+.explanation-box h3 {
+  font-size: 22px;
+  color: #e6005c;
   margin-bottom: 10px;
 }
 
-.solution-card p {
-  font-weight: bold;
-  color: #222;
+.explanation-box p {
+  font-size: 16px;
+  line-height: 1.6;
 }
 
-.explanation-box {
-  display: none;
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 30px;
-  background: white;
-  border-radius: 12px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.1);
-  text-align: justify;
+@media (max-width: 768px) {
+  .explanation-content {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .explanation-image img {
+    width: 100%;
+    max-width: 300px;
+  }
 }
+
 html {
   scroll-behavior: smooth;
 }
@@ -262,13 +329,21 @@ html {
       helping you stay in control, deliver exceptional service, and never miss an opportunity to engage with your customers.
     </p>
   </div>
+ <!-- ? Thumbnail image with play button -->
+<div class="video-thumbnail-container" onclick="openVideo()">
+  <img src="images/intro.png" alt="Video Preview">
+  <button class="play-button">?</button>
+</div>
 
-  <div class="welcome-video">
-    <video controls width="100%" height="auto">
-      <source src="images/video.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
-  </div>
+<!-- ? Video Modal -->
+<div class="video-modal" id="videoModal">
+  <span class="close-btn" onclick="closeVideo()">&times;</span>
+  <video id="popupVideo" controls>
+    <source src="images/video.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+</div>
+
 </div>
 <div class="intro-wrapper">
   <div class="intro-section">
@@ -416,9 +491,8 @@ html {
   </div>
 </section>
 
-
 <div class="solutions-section" id="solutions">
-  <h4>We've Done Lot's Of Work, Let Check Some From Here</h4>
+  <h4>We've Done Lots Of Work, Let's Check Some From Here</h4>
   <h2>Solutions</h2>
 
   <div class="card-container">
@@ -426,22 +500,27 @@ html {
       <img src="https://img.icons8.com/ios-filled/50/pie-chart--v1.png" alt="CEM" />
       <p>Customer Experience<br>Management</p>
     </div>
-
     <div class="solution-card" onclick="showContent('bos')">
       <img src="https://img.icons8.com/ios-filled/50/services.png" alt="Back Office" />
       <p>Back Office Services</p>
     </div>
-
     <div class="solution-card" onclick="showContent('digital')">
       <img src="https://img.icons8.com/ios-filled/50/chat.png" alt="Digital" />
-      <p>Digital service</p>
+      <p>Digital Service</p>
     </div>
   </div>
 
-  <!-- Explanation sections -->
-  <div class="explanation-box" id="cem">
-    <h3>Customer Experience Management</h3>
-    <p>On call contact center provides a variety of certified voice Customer Experience 
+  <!-- Explanation Wrapper -->
+  <div class="explanation-wrapper">
+
+    <!-- CEM -->
+    <div class="explanation-content" id="cem">
+      <div class="explanation-image">
+        <img src="images/1.png" alt="Customer Experience Image" />
+      </div>
+      <div class="explanation-box">
+        <h3>Customer Experience Management</h3>
+        <p>On call contact center provides a variety of certified voice Customer Experience 
     services that enhance your day to day performance in the various business processes in your organization.
     On Call is your trusted outsourced partner in all your BPO and Customer Experience requirements.
 Customer service experience support Part of our main Customer Experience Solutions 
@@ -450,39 +529,62 @@ every one of your customers by providing superior post-sales service 24 hours a 
 Improving your customer loyalty will enable you to maintain your customers and save the costs of acquiring new customers. 
 Customer excellence range from responding to your customer's inquiries and solving their problems, 
 up to maintaining high customer satisfaction rates through personalized outsourced solutions.</p>
-  </div>
+      </div>
+    </div>
 
-  <div class="explanation-box" id="bos">
-    <h3>Back Office Services</h3>
-    <p>On call Contact Center provides a variety of non-voice Contact Center and BPO Solutions that enhance the customer experience management along 
+    <!-- BOS -->
+    <div class="explanation-content" id="bos" style="display: none;">
+      <div class="explanation-image">
+        <img src="images/2.png" alt="Back Office Image" />
+      </div>
+      <div class="explanation-box">
+        <h3>Back Office Services</h3>
+        <p>On call Contact Center provides a variety of non-voice Contact Center and BPO Solutions that enhance the customer experience management along 
     with your day to day interactions with your customers through a proven track record with our expertise in 
     outsourcing solutions across all our sites in middle east.
 Data management We mainly focus on handling low to medium transactions, including the internal operational processes of all companies,
 by making a complete customization of the dashboard according to the requirements of each client. Other services also include data entry functions,
 direct conversations, email management, and WhatsApp requests for more than 8 languages.</p>
-  </div>
+      </div>
+    </div>
 
-  <div class="explanation-box" id="digital">
-    <h3>Digital Service</h3>
-    <p>We help our clients to get a comprehensive customer experience management, 
+    <!-- Digital -->
+    <div class="explanation-content" id="digital" style="display: none;">
+      <div class="explanation-image">
+        <img src="images/3.png" alt="Digital Services Image" />
+      </div>
+      <div class="explanation-box">
+        <h3>Digital Service</h3>
+        <p>We help our clients to get a comprehensive customer experience management, 
     On Call enhances the integrated Omni-channel CX management Solutions For the Social Media Management technology, 
     we give our clients the option to outsource their work with renowned technologies that give deep analysis their customers 
     on social media conversations across multiple platforms including Facebook, Twitter, Instagram, LinkedIn, etc. 
     and extends to virtually all public data on open blogs, forums, and micro websites, with the ability to flag the top influencers,
     trending topics, sentiment analysis and a lot more including deep profiling of online communities that exceed the traditional demographic analysis.</p>
+      </div>
+    </div>
+
   </div>
 </div>
+
   <%- include('partials/footer') %>
 </body>
 </html>
 <script>
 function showContent(id) {
-  // Hide all explanation boxes
-  document.querySelectorAll('.explanation-box').forEach(box => box.style.display = 'none');
+    // Hide all explanation-content divs
+    document.querySelectorAll(".explanation-content").forEach(el => {
+      el.style.display = "none";
+    });
 
-  // Show the selected one
-  document.getElementById(id).style.display = 'block';
-}
+    // Show the selected one
+    const target = document.getElementById(id);
+    if (target) target.style.display = "flex";
+  }
+
+  // Optional: Show default one on page load
+  window.onload = () => showContent('cem');
+
 function showSection(id) {
     // Hide all sections
     document.querySelectorAll('.section').forEach(section => {
@@ -491,5 +593,19 @@ function showSection(id) {
 
     // Show the selected section
     document.getElementById(id).classList.add('active');
+  }
+  function openVideo() {
+    const modal = document.getElementById("videoModal");
+    const video = document.getElementById("popupVideo");
+    modal.style.display = "flex";
+    video.play();
+  }
+
+  function closeVideo() {
+    const modal = document.getElementById("videoModal");
+    const video = document.getElementById("popupVideo");
+    modal.style.display = "none";
+    video.pause();
+    video.currentTime = 0;
   }
 </script>
