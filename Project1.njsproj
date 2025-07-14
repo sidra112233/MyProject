@@ -11,7 +11,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>fcd5301d-e65c-4472-95a8-20352baeeb0b</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>server.js</StartupFile>
+    <StartupFile>login.js</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>
@@ -28,7 +28,11 @@
     <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="db.js" />
+    <Content Include="login.js" />
     <Content Include="views\about.ejs" />
+    <Content Include="views\dashboard.ejs" />
+    <Content Include="views\login.ejs" />
     <Content Include="views\partials\chatbot.ejs" />
     <Content Include="views\digital.ejs" />
     <Content Include="views\government.ejs" />

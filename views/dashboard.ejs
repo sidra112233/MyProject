@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #f9f9f9;
+      margin: 0;
+    }
+
+    /* Top Purple Bar */
+    .topbar {
+      background: #4b0082;
+      padding: 15px 30px;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .topbar-left {
+      display: flex;
+      align-items: center;
+      gap: 30px;
+    }
+
+    .topbar-left img.logo {
+      height: 35px;
+    }
+
+    .topbar-left .menu a {
+      color: white;
+      text-decoration: none;
+      margin-right: 20px;
+      font-size: 16px;
+    }
+
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .topbar-right i {
+      font-size: 18px;
+      cursor: pointer;
+    }
+
+    .topbar-right span {
+      font-weight: bold;
+    }
+
+    /* Below Top Navbar */
+    .navbar {
+      background-color: #f4f4f4;
+      padding: 15px 40px;
+      font-size: 14px;
+      color: #333;
+    }
+
+    /* Dashboard */
+    .dashboard-container {
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h2 {
+      color: #4b0082;
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    .stats-section {
+      margin-top: 20px;
+      width: 100%;
+      max-width: 1000px;
+    }
+
+    .card-grid {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 50px;
+    }
+
+    .card {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      width: 150px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+
+    .card .icon {
+      font-size: 30px;
+      margin-bottom: 10px;
+    }
+
+    .teal { color: #00cfe8; }
+    .purple { color: #6f42c1; }
+    .red { color: #ff4b5c; }
+
+  </style>
+</head>
+<body>
+
+<!-- Topbar (Purple with Menu and User Info) -->
+<div class="topbar">
+  <div class="topbar-left">
+    <img src="/public/logo.png" class="logo" alt="OnCall Logo" />
+    <div class="menu">
+      <a href="#">Dashboard</a>
+      <a href="#">Inbound</a>
+      <a href="#">Outbound</a>
+      <a href="#">Customers</a>
+      <a href="#">Languages</a>
+      <a href="#">Attendance</a>
+      <a href="#">Chats</a>
+    </div>
+  </div>
+  <div class="topbar-right">
+    <i class="fas fa-bell"></i>
+    <i class="fas fa-comment"></i>
+    <span><%= user.username || user.email %></span>
+    <i class="fas fa-user-circle"></i>
+  </div>
+</div>
+
+<!-- Secondary Navbar below (Breadcrumbs / optional) -->
+<div class="navbar">
+  Home &gt; Dashboard
+</div>
+
+<!-- Dashboard Content -->
+<div class="dashboard-container">
+  <h2>Inbound Statistics</h2>
+  <div class="card-grid stats-section">
+    <div class="card">
+      <div class="icon teal"><i class="fas fa-phone-volume"></i></div>
+      <div><strong><%= stats.total_inbound %></strong><br/>Total Inbound</div>
+    </div>
+    <div class="card">
+      <div class="icon teal"><i class="fas fa-calendar-day"></i></div>
+      <div><strong><%= stats.inbound_today %></strong><br/>Inbound Today</div>
+    </div>
+    <div class="card">
+      <div class="icon teal"><i class="fas fa-tasks"></i></div>
+      <div><strong><%= stats.unsaved_total %></strong><br/>Unsaved Total</div>
+    </div>
+    <div class="card">
+      <div class="icon red"><i class="fas fa-hourglass-half"></i></div>
+      <div><strong><%= stats.unsaved_today %></strong><br/>Unsaved Today</div>
+    </div>
+  </div>
+
+  <h2>Outbound Statistics</h2>
+  <div class="card-grid stats-section">
+    <div class="card">
+      <div class="icon purple"><i class="fas fa-phone-volume"></i></div>
+      <div><strong><%= stats.total_outbound %></strong><br/>Total Outbound</div>
+    </div>
+    <div class="card">
+      <div class="icon purple"><i class="fas fa-calendar-alt"></i></div>
+      <div><strong><%= stats.outbound_today %></strong><br/>Outbound Today</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

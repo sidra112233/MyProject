@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require('path');
-const path = require('mysql');
+const mysql = require('mysql2');
 const app = express();
 const PORT = 3000;
 app.set('view engine', 'ejs');
@@ -8,7 +8,23 @@ app.set('views', path.join(__dirname, 'views'));
 
 // Serve static files (CSS, JS, images)
 app.use(express.static(path.join(__dirname, 'public')));
+// Create connection
+const connection = mysql.createConnection({
+    host: 'localhost',       // or your remote host
+    user: 'root',            // your MySQL username
+    password: '',            // your MySQL password
+    database: 'callcenter' // your database name
+});
+// Connect
+connection.connect((err) => {
+    if (err) {
+        console.error('MySQL connection failed: ' + err.stack);
+        return;
+    }
+    console.log('Connected to MySQL as ID ' + connection.threadId);
+});
 
+module.exports = connection;
 // Serve HTML file
 app.get('/', (req, res) => {
     res.render('home');
