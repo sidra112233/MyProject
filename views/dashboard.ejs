@@ -1,177 +1,336 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Dashboard</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
-  <!-- Font Awesome -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modern Dashboard</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
   <style>
-    body {
-      font-family: 'Poppins', sans-serif;
-      background-color: #f9f9f9;
+    * {
+      box-sizing: border-box;
       margin: 0;
+      padding: 0;
     }
 
-    /* Top Purple Bar */
-    .topbar {
-      background: #4b0082;
-      padding: 15px 30px;
+    body {
+      font-family: 'Poppins', sans-serif;
+      display: flex;
+      min-height: 100vh;
+      background: #f5f7fa;
+      color: #333;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    body.dark-mode {
+      background: #181a1b;
+      color: #f0f0f0;
+    }
+
+    .sidebar {
+      width: 240px;
+      background: #253243;
       color: white;
+      display: flex;
+      flex-direction: column;
+      padding: 30px 20px;
+      box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .sidebar h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 24px;
+      font-weight: 600;
+    }
+
+    .sidebar a, .sidebar .dropbtn {
+      color: white;
+      text-decoration: none;
+      margin: 10px 0;
+      padding: 10px;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 500;
+      background: none;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .sidebar a:hover, .sidebar .dropbtn:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: #ffcc00;
+    }
+
+    .dropdown {
+      position: relative;
+    }
+    .dropdown-content {
+  display: none;
+  position: absolute;
+  left: 100%;
+  top: 0;
+  background-color: #fff;
+  color: #333;
+  min-width: 200px;
+  max-height: 300px; /* ?? Set max height */
+  overflow-y: auto;   /* ?? Enable vertical scroll */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  z-index: 1;
+}
+    .dropdown-content a {
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: #333;
+      font-size: 14px;
+    }
+
+    .dropdown-content a:hover {
+      background-color: #f1f1f1;
+    }
+
+    .dropdown:hover .dropdown-content {
+      display: block;
+    }
+
+    .main {
+      flex: 1;
+      padding: 40px;
+    }
+
+    .header {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      margin-bottom: 40px;
     }
 
-    .topbar-left {
-      display: flex;
-      align-items: center;
-      gap: 30px;
+    .header h1 {
+      font-size: 26px;
+      font-weight: 600;
+      color: #2e3b55;
     }
 
-    .topbar-left img.logo {
-      height: 35px;
+    .dark-mode .header h1 {
+      color: #fff;
     }
 
-    .topbar-left .menu a {
-      color: white;
-      text-decoration: none;
-      margin-right: 20px;
-      font-size: 16px;
-    }
-
-    .topbar-right {
+    .header-icons {
       display: flex;
       align-items: center;
       gap: 15px;
+      color: #2e3b55;
     }
 
-    .topbar-right i {
-      font-size: 18px;
+    .dark-mode .header-icons {
+      color: #fff;
+    }
+
+    .toggle-btn {
+      background: #2e3b55;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 6px;
       cursor: pointer;
-    }
-
-    .topbar-right span {
-      font-weight: bold;
-    }
-
-    /* Below Top Navbar */
-    .navbar {
-      background-color: #f4f4f4;
-      padding: 15px 40px;
-      font-size: 14px;
-      color: #333;
-    }
-
-    /* Dashboard */
-    .dashboard-container {
-      padding: 40px;
       display: flex;
-      flex-direction: column;
       align-items: center;
+      gap: 8px;
+      font-size: 14px;
     }
 
-    h2 {
-      color: #4b0082;
-      margin-top: 40px;
-      text-align: center;
+    .section {
+      margin-bottom: 40px;
     }
 
-    .stats-section {
-      margin-top: 20px;
-      width: 100%;
-      max-width: 1000px;
+    .section h2 {
+      font-size: 20px;
+      font-weight: 600;
+      color: #2e3b55;
+      margin-bottom: 20px;
     }
 
-    .card-grid {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 50px;
+    .dark-mode .section h2 {
+      color: #fff;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 30px;
     }
 
     .card {
       background: white;
       padding: 20px;
-      border-radius: 10px;
-      width: 150px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
       text-align: center;
+      transition: background 0.3s, color 0.3s;
     }
 
-    .card .icon {
+    .dark-mode .card {
+      background: #2a2a3d;
+      color: #ddd;
+    }
+
+    .card i {
       font-size: 30px;
+      color: #0077cc;
       margin-bottom: 10px;
     }
 
+    .card h3 {
+      margin-top: 10px;
+      font-size: 18px;
+      color: #333;
+    }
+
+    .dark-mode .card h3 {
+      color: #fff;
+    }
+
+    @media (max-width: 768px) {
+      .sidebar {
+        display: none;
+      }
+      .main {
+        padding: 20px;
+      }
+    }
     .teal { color: #00cfe8; }
     .purple { color: #6f42c1; }
     .red { color: #ff4b5c; }
-
   </style>
 </head>
 <body>
+<div class="sidebar">
+    <h2>Dashboard</h2>
+    <a href="/dashboard"><i class="fas fa-chart-line"></i> Dashboard</a>
 
-<!-- Topbar (Purple with Menu and User Info) -->
-<div class="topbar">
-  <div class="topbar-left">
-    <img src="/public/logo.png" class="logo" alt="OnCall Logo" />
-    <div class="menu">
-      <a href="#">Dashboard</a>
-      <a href="#">Inbound</a>
-      <a href="#">Outbound</a>
-      <a href="#">Customers</a>
-      <a href="#">Languages</a>
-      <a href="#">Attendance</a>
-      <a href="#">Chats</a>
+    <div class="dropdown">
+      <button class="dropbtn"><i class="fas fa-phone-incoming"></i> Inbound <i class="fas fa-caret-down"></i></button>
+      <div class="dropdown-content">
+        <a href="/inbound/calls"><i class="fas fa-phone"></i> Calls</a>
+        <a href="/inbound/review"><i class="fas fa-star"></i> Review</a>
+        <a href="/inbound/notes"><i class="fas fa-sticky-note"></i> Notes</a>
+        <a href="/inbound/add"><i class="fas fa-plus-circle"></i> Add New</a>
+        <a href="/inbound/callbacks"><i class="fas fa-redo-alt"></i> Call Backs</a>
+        <a href="/inbound/missed"><i class="fas fa-phone-slash"></i> Missed Calls</a>
+      </div>
     </div>
-  </div>
-  <div class="topbar-right">
-    <i class="fas fa-bell"></i>
-    <i class="fas fa-comment"></i>
-    <span><%= user.username || user.email %></span>
-    <i class="fas fa-user-circle"></i>
+
+    <div class="dropdown">
+      <button class="dropbtn"><i class="fas fa-phone-outgoing"></i> Outbound <i class="fas fa-caret-down"></i></button>
+      <div class="dropdown-content">
+        <a href="/outbound/leads"><i class="fas fa-user-plus"></i> Leads</a>
+        <a href="/outbound/calls"><i class="fas fa-phone"></i> Calls</a>
+        <a href="/outbound/tasks"><i class="fas fa-tasks"></i> Tasks</a>
+        <a href="/outbound/callbacks"><i class="fas fa-redo-alt"></i> Call Backs</a>
+      </div>
+    </div>
+
+    <div class="dropdown">
+      <button class="dropbtn"><i class="fas fa-users"></i> Customers </button>
+      <div class="dropdown-content">
+        <a href="/customers/lists"><i class="fas fa-list"></i> Lists</a>
+        <a href="/customers/accounts"><i class="fas fa-envelope"></i> Outlook Accounts</a>
+      </div>
+    </div>
+
+    <a href="/languages"><i class="fas fa-language"></i> Languages</a>
+
+    <div class="dropdown">
+      <button class="dropbtn"><i class="fas fa-calendar-check"></i> Attendance</button>
+      <div class="dropdown-content">
+        <a href="/attendance/history"><i class="fas fa-history"></i> History</a>
+        <a href="/attendance/update"><i class="fas fa-pen"></i> Add/Update</a>
+      </div>
+    </div>
+
+    <a href="/roster"><i class="fas fa-calendar-week"></i> Weekly Roster</a>
+  <div class="dropdown">
+  <button class="dropbtn">Chats <i class="fas fa-comments"></i></button>
+  <div class="dropdown-content">
+    <a href="/chats/dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
+    <a href="/chats/messenger"><i class="fab fa-facebook-messenger"></i> Messenger</a>
+    <a href="/chats/fb-comments"><i class="fas fa-comment-alt"></i> FB Comments</a>
+    <a href="/chats/twitter"><i class="fab fa-twitter"></i> Twitter</a>
+    <a href="/chats/instagram"><i class="fab fa-instagram"></i> Instagram</a>
+    <a href="/chats/whatsapp"><i class="fab fa-whatsapp"></i> Whatsapp <span class="dot"></span></a>
+    <a href="/chats/wb-whatsapp"><i class="fab fa-whatsapp-square"></i> WB Whatsapp <span class="dot"></span></a>
+    <a href="/chats/outlook"><i class="fas fa-th"></i> Outlook Emails <span class="dot"></span></a>
+    <a href="/chats/gmail"><i class="far fa-envelope"></i> Google Emails <span class="dot"></span></a>
+    <a href="/chats/web-chat"><i class="fas fa-comments"></i> Web Chat <span class="dot"></span></a>
+    <a href="/chats/tickets"><i class="fas fa-ticket-alt"></i> Tickets</a>
+    <a href="/chats/haier-gulf"><i class="fas fa-industry"></i> Haier Gulf</a>
   </div>
 </div>
-
-<!-- Secondary Navbar below (Breadcrumbs / optional) -->
-<div class="navbar">
-  Home &gt; Dashboard
-</div>
-
-<!-- Dashboard Content -->
-<div class="dashboard-container">
-  <h2>Inbound Statistics</h2>
-  <div class="card-grid stats-section">
-    <div class="card">
-      <div class="icon teal"><i class="fas fa-phone-volume"></i></div>
-      <div><strong><%= stats.total_inbound %></strong><br/>Total Inbound</div>
-    </div>
-    <div class="card">
-      <div class="icon teal"><i class="fas fa-calendar-day"></i></div>
-      <div><strong><%= stats.inbound_today %></strong><br/>Inbound Today</div>
-    </div>
-    <div class="card">
-      <div class="icon teal"><i class="fas fa-tasks"></i></div>
-      <div><strong><%= stats.unsaved_total %></strong><br/>Unsaved Total</div>
-    </div>
-    <div class="card">
-      <div class="icon red"><i class="fas fa-hourglass-half"></i></div>
-      <div><strong><%= stats.unsaved_today %></strong><br/>Unsaved Today</div>
+    <div class="dropdown">
+      <button class="dropbtn"><i class="fab fa-whatsapp"></i> WB Whatsapp </button>
+      <div class="dropdown-content">
+        <a href="/whatsapp/numbers"><i class="fas fa-hashtag"></i> Numbers</a>
+        <a href="/whatsapp/reviews"><i class="fas fa-star-half-alt"></i> Reviews</a>
+      </div>
     </div>
   </div>
-
-  <h2>Outbound Statistics</h2>
-  <div class="card-grid stats-section">
-    <div class="card">
-      <div class="icon purple"><i class="fas fa-phone-volume"></i></div>
-      <div><strong><%= stats.total_outbound %></strong><br/>Total Outbound</div>
+  <div class="main">
+    <div class="header">
+      <h1>Welcome to Dashboard</h1>
+        <div class="header-icons">
+        <i class="fas fa-bell"></i>
+        <i class="fas fa-comment"></i>
+        <span><%= user.username || user.email %></span>
+        <i class="fas fa-user-circle"></i>
+        <button class="toggle-btn" onclick="toggleDarkMode()">
+          <i class="fas fa-moon"></i>
+        </button>
+      </div>
     </div>
-    <div class="card">
-      <div class="icon purple"><i class="fas fa-calendar-alt"></i></div>
-      <div><strong><%= stats.outbound_today %></strong><br/>Outbound Today</div>
+
+    <div class="section">
+    <h2>Inbound Statistics</h2>
+    <div class="grid">
+      <div class="card">
+        <div class="icon teal"><i class="fas fa-phone-volume"></i></div>
+        <div><strong><%= stats.total_inbound %></strong><br/>Total Inbound</div>
+      </div>
+      <div class="card">
+        <div class="icon red"><i class="fas fa-calendar-day"></i></div>
+        <div><strong><%= stats.inbound_today %></strong><br/>Inbound Today</div>
+      </div>
+      <div class="card">
+        <div class="icon teal"><i class="fas fa-tasks"></i></div>
+        <div><strong><%= stats.unsaved_total %></strong><br/>Unsaved Total</div>
+      </div>
+      <div class="card">
+        <div class="icon red"><i class="fas fa-hourglass-half"></i></div>
+        <div><strong><%= stats.unsaved_today %></strong><br/>Unsaved Today</div>
+      </div>
+    </div>
+    <h2>Outbound Statistics</h2>
+    <div class="grid">
+      <div class="card">
+        <div class="icon purple"><i class="fas fa-phone-volume"></i></div>
+        <div><strong><%= stats.total_outbound %></strong><br/>Total Outbound</div>
+      </div>
+      <div class="card">
+        <div class="icon purple"><i class="fas fa-calendar-alt"></i></div>
+        <div><strong><%= stats.outbound_today %></strong><br/>Outbound Today</div>
+      </div>
     </div>
   </div>
-</div>
+   <script>
+    function toggleDarkMode() {
+      document.body.classList.toggle('dark-mode');
+    }
 
+</script>
 </body>
 </html>
