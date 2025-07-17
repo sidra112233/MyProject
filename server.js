@@ -5,17 +5,15 @@ const app = express();
 const PORT = 3000;
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
-
-// Serve static files (CSS, JS, images)
 app.use(express.static(path.join(__dirname, 'public')));
-// Create connection
+//  connection
 const connection = mysql.createConnection({
-    host: 'localhost',       // or your remote host
-    user: 'root',            // your MySQL username
-    password: '',            // your MySQL password
-    database: 'callcenter' // your database name
+    host: 'localhost',       
+    user: 'root',           
+    password: '',            
+    database: 'callcenter' 
 });
-// Connect
+// Connect to database
 connection.connect((err) => {
     if (err) {
         console.error('MySQL connection failed: ' + err.stack);
@@ -25,55 +23,54 @@ connection.connect((err) => {
 });
 
 module.exports = connection;
-// Serve HTML file
 app.get('/', (req, res) => {
     res.render('home');
 });
 app.get('/about', (req, res) => {
-    res.render('about'); // about.ejs
+    res.render('about'); 
 });
 app.get('/ecommerce', (req, res) => {
-    res.render('ecommerce'); // ecommerce.ejs
+    res.render('ecommerce'); 
 });
 
 app.get('/government', (req, res) => {
-    res.render('government'); // government.ejs
+    res.render('government');
 });
 
 app.get('/realestate', (req, res) => {
-    res.render('realestate'); // realestate.ejs
+    res.render('realestate'); 
 });
 app.get('/medical', (req, res) => {
-    res.render('medical'); // medical.ejs
+    res.render('medical'); 
 });
 
 app.get('/fastfood', (req, res) => {
-    res.render('fastfood'); // fastfood.ejs
+    res.render('fastfood'); 
 });
 
 app.get('/travel', (req, res) => {
-    res.render('travel'); // travel.ejs
+    res.render('travel'); 
 });
 
 app.get('/facility', (req, res) => {
-    res.render('facility'); // facility.ejs
+    res.render('facility'); 
 });
 app.get('/services', (req, res) => {
-    res.render('services'); // services.ejs
+    res.render('services'); 
 });
 
 app.get('/why', (req, res) => {
-    res.render('why'); // why.ejs
+    res.render('why'); 
 });
 app.get('/inbound', (req, res) => {
-    res.render('inbound'); // inbound.ejs
+    res.render('inbound'); 
 });
 app.get('/digital', (req, res) => {
-    res.render('digital'); // digital.ejs
+    res.render('digital'); 
 });
 
 app.get('/contact', (req, res) => {
-    res.render('contact'); // contact.ejs
+    res.render('contact');
 });
 app.listen(PORT, () => {
     console.log(`Server is running at http://localhost:${PORT}`);

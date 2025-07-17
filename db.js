@@ -4,8 +4,8 @@ const mysql = require('mysql2');
 const db = mysql.createConnection({
     host: 'localhost',
     user: 'root',
-    password: '',       // or your MySQL password
-    database: 'callcenter' // ? change to your DB name
+    password: '',      
+    database: 'callcenter' 
 });
 
 db.connect((err) => {

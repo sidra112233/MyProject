@@ -8,13 +8,11 @@
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
 :root{
-  --pink:#ff006e;      /* launcher / accent */
-  --navy:#070430;      /* header */
-  --bg:#f6e6f4;        /* body background */
-  --bubble:#ffffff;    /* quick question btn */
+  --pink:#ff006e;    
+  --navy:#070430;     
+  --bg:#f6e6f4;        
+  --bubble:#ffffff;   
 }
-
-/* ------------ launcher button -------------- */
 #chat-toggle{
   position:fixed;bottom:25px;right:25px;
   width:60px;height:60px;border-radius:50%;
@@ -23,7 +21,6 @@
   cursor:pointer;z-index:1000;box-shadow:0 4px 14px rgba(0,0,0,.25);
 }
 
-/* ------------ chat panel -------------- */
 #chatbox{
   display:none;flex-direction:column;
   position:fixed;bottom:95px;right:20px;
@@ -35,22 +32,19 @@
 }
 @keyframes puff{from{transform:scale(.8);opacity:0}to{transform:scale(1);opacity:1}}
 
-/* top bar with notch */
 .chat-header{
   background:var(--navy);
   height:80px;position:relative;color:#fff;
   display:flex;align-items:center;justify-content:flex-end;
   padding:0 18px;gap:18px;font-size:18px;
 }
-.chat-header::after{               /* little notch */
+.chat-header::after{              
   content:"";position:absolute;bottom:-12px;left:50%;
   transform:translateX(-50%) rotate(180deg);
   width:32px;height:24px;
   background:var(--navy);clip-path:polygon(0 0,100% 0,50% 100%);
 }
 .chat-header i{cursor:pointer}
-
-/* avatar & greeting */
 .chat-top{
   text-align:center;padding:60px 25px 25px;background:linear-gradient(#fff 0,var(--bg) 100%);
 }
@@ -61,7 +55,6 @@
 .chat-top h4{margin:18px 0 8px;font-size:20px;font-weight:700;color:#333}
 .chat-top p{margin:0;font-size:14px;color:#444}
 
-/* quick question buttons */
 .quick-btn{display:flex;align-items:center;justify-content:space-between;
   background:var(--bubble);border:none;border-radius:16px;padding:14px 18px;
   width:100%;font-size:15px;font-weight:600;color:#000;margin:10px 0;cursor:pointer}
@@ -69,14 +62,12 @@
   width:38px;height:38px;display:flex;align-items:center;justify-content:center;
   border-radius:50%;font-size:18px}
 
-/* scrollable thread */
 .chat-body{flex:1;overflow-y:auto;padding:0 20px;background:var(--bg)}
 .user-message,.bot-message{
   max-width:80%;margin:10px 0;padding:10px 14px;border-radius:12px;font-size:14px}
 .user-message{background:var(--pink);color:#fff;margin-left:auto}
 .bot-message{background:#fff;color:#222}
 
-/* input row */
 .chat-input{
   background:var(--bg);padding:12px;display:flex;gap:10px;
   align-items:center;border-top:1px solid #e2cfe1;font-size:14px}
@@ -90,11 +81,7 @@
 </style>
 </head>
 <body>
-
-<!-- launcher -->
 <div id="chat-toggle"><i class="fas fa-comment"></i></div>
-
-<!-- panel -->
 <div id="chatbox">
   <div class="chat-header">
     <i class="fas fa-rotate-right" title="Reset"></i>
@@ -105,8 +92,6 @@
     <img src="https://i.imgur.com/LSX6pUu.png" alt="bot">
     <h4>Hi there!</h4>
     <p>If you have questions about Oncall, I can help!</p>
-
-    <!-- quick questions -->
     <button class="quick-btn" onclick="quickAsk('How is Oncall different from other BPOs?')">
       How is Oncall different from other BPOs?
       <i class="fas fa-globe"></i>
@@ -124,11 +109,7 @@
       <i class="fas fa-user"></i>
     </button>
   </div>
-
-  <!-- messages area -->
   <div class="chat-body" id="chat-body"></div>
-
-  <!-- input -->
   <div class="chat-input">
     <input id="user-input" placeholder="Type your question here" />
     <button onclick="sendMsg()"><i class="fas fa-paper-plane"></i></button>
@@ -136,15 +117,12 @@
 </div>
 
 <script>
-/* open / close ---------------------------------------------------*/
 const toggle = document.getElementById('chat-toggle');
 const chat   = document.getElementById('chatbox');
 toggle.onclick = ()=> chat.style.display = chat.style.display==='flex'?'none':'flex';
 
-/* quick buttons --------------------------------------------------*/
 function quickAsk(txt){ document.getElementById('user-input').value = txt; sendMsg(); }
 
-/* send / append --------------------------------------------------*/
 function sendMsg(){
   const input = document.getElementById('user-input');
   const text  = input.value.trim();
@@ -161,8 +139,6 @@ function appendBubble(msg,type){
   document.getElementById('chat-body').appendChild(div);
   document.getElementById('chat-body').scrollTop = document.getElementById('chat-body').scrollHeight;
 }
-
-/* simulated answer ----------------------------------------------*/
 function mockReply(q){ return "We're processing your question: \""+q+"\". An agent will reply soon."; }
 </script>
 </body>

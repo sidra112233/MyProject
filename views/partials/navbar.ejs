@@ -10,8 +10,6 @@
       font-family: Arial, sans-serif;
       background-color: #fff;
     }
-
-    /* ? Navbar container */
     .navbar {
       background-color: #ffffff;
       display: flex;
@@ -20,15 +18,11 @@
       padding: 10px 30px;
       flex-wrap: wrap;
     }
-
-    /* ? Company name/logo on the left */
     .navbar-left {
       font-size: 20px;
       font-weight: bold;
       color: #e6005c;
     }
-
-    /* ? Navigation links on the right */
     .navbar-right {
       display: flex;
       align-items: center;
@@ -82,14 +76,11 @@
     .dropdown:hover .dropdown-content {
       display: block;
     }
-    
-    /* ? Responsive Navbar */
     @media (max-width: 768px) {
       .navbar {
         flex-direction: column;
         align-items: flex-start;
       }
-
       .navbar-right {
         flex-direction: column;
         gap: 10px;
@@ -100,12 +91,9 @@
   </style>
 </head>
 <body>
-
-  <!-- ? Navbar -->
   <nav class="navbar">
     <div class="navbar-left">
       MyCompany
-      <!-- Replace with <img src="logo.png" alt="Logo"> for image logo -->
     </div>
     <div class="navbar-right">
       <a href="/about">About us</a>

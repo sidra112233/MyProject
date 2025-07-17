@@ -48,8 +48,6 @@
       border-radius: 50%;
       cursor: pointer;
     }
-
-    /* Fullscreen video modal */
     .video-modal {
       display: none;
       position: fixed;
@@ -92,7 +90,7 @@
   justify-content: space-between;
   align-items: center;
   gap: 30px;
-  flex-wrap: wrap; /* for mobile responsiveness */
+  flex-wrap: wrap;
   padding: 40px 30px;
   max-width: 1200px;
   margin: auto;
@@ -113,15 +111,12 @@
       width: 300px;
       margin: 50px auto;
 }
-
-
 .intro-small,
 .intro-large {
   font-size: 16px;
   line-height: 1.6;
   text-align: justify;
 }
-
 .dashboard-section {
   background: #f3f3f3;
   padding: 60px 0;
@@ -168,23 +163,19 @@
 .section.active {
   display: block;
 }
-
-/* Responsive (optional) */
 @media (max-width: 768px) {
   .dash-wrapper { flex-direction: column; }
   .dash-lines { flex-direction: row; padding: 20px 0; }
   .line { height: 4px; width: 24px; }
 }
-
 .stats-section {
   background:white no-repeat center center/cover;
   position: relative;
   padding: 10px 20px;
   color: white;
 }
-
 .overlay {
-  background-color:white /* Purple overlay */
+  background-color:white;
   padding: 30px 20px;
   text-align: center;
 }
@@ -329,13 +320,10 @@ html {
       helping you stay in control, deliver exceptional service, and never miss an opportunity to engage with your customers.
     </p>
   </div>
- <!-- ? Thumbnail image with play button -->
 <div class="video-thumbnail-container" onclick="openVideo()">
   <img src="images/intro.png" alt="Video Preview">
   <button class="play-button">?</button>
 </div>
-
-<!-- ? Video Modal -->
 <div class="video-modal" id="videoModal">
   <span class="close-btn" onclick="closeVideo()">&times;</span>
   <video id="popupVideo" controls>
@@ -343,7 +331,6 @@ html {
     Your browser does not support the video tag.
   </video>
 </div>
-
 </div>
 <div class="intro-wrapper">
   <div class="intro-section">
@@ -358,13 +345,11 @@ html {
       mainly Technology & Consumer Electronics, Media & Communication, Fast Food, Insurance, Automotive, White Goods, 
       Retail, Health care, Travel & Hospitality, E-commerce, Government & Public Service, Real Estate...among others.
     </p>
-  </div>
-
+  </div>    
   <div class="intro-img">
     <img src="images/about-1.png" alt="introduction" />
   </div>
 </div>
-
 <section class="stats-section">
   <div class="overlay">
     <h2>Interesting Facts About On Call</h2>
@@ -407,13 +392,9 @@ html {
 </section>
 <section class="dashboard-section">
   <div class="dash-wrapper">
-
-    <!-- Left: Image -->
     <div class="dash-img">
       <img src="images/client-img.jpg" alt="Experience Hub" />
     </div>
-
-    <!-- Middle: Clickable Colored Lines -->
     <div class="dash-lines">
       <div class="line blue-dark" onclick="showSection('why')"></div>
       <div class="line green" onclick="showSection('dashboard')"></div>
@@ -421,7 +402,6 @@ html {
       <div class="line green" onclick="showSection('extra1')"></div>
     </div>
 
-    <!-- Right: Dynamic Content Area -->
     <div class="dash-content">
       <div id="why" class="section active">
         <h2>Why Us</h2>
@@ -464,28 +444,23 @@ html {
       </div>
        <div id="extra1" class="section">
       <p>
-							<b>Try On call for free:</b>
-							Try On call for a limited time to find a package best suited for your business.						</p>
-						
-						<p>
-							<b>24x7 Call Operators:</b>
-							Catch all your leads, enquiries, orders and customer complaints, all day, every day.						</p>
-						
-						<p>
-							<b>Multilingual Agents:</b>
-							Catch all your leads, enquiries, orders and customer complaints, all day, every day.						</p>
-						
-						<p>
-							<b>Customizable admin dashboard:</b>
-							Choose or edit your scripts, language preferences, office timings and much more.						</p>
-						
-						<p>
-							<b>Instant Notification:</b>
-							Monitor calls and get notifications integrated in a comprehensive reporting system.						</p>
-						
-						<p>
-							<b>Quick and hassle free set-up:</b>
-							No assembly or hardware installations - just sign up and sign in.						</p>
+		<b>Try On call for free:</b>
+		Try On call for a limited time to find a package best suited for your business.</p>
+		<p>
+		<b>24x7 Call Operators:</b>
+		Catch all your leads, enquiries, orders and customer complaints, all day, every day.</p>
+		<p>
+		<b>Multilingual Agents:</b>
+		Catch all your leads, enquiries, orders and customer complaints, all day, every day.</p>
+		<p>
+		<b>Customizable admin dashboard:</b>
+		Choose or edit your scripts, language preferences, office timings and much more.</p>
+		<p>
+		<b>Instant Notification:</b>
+		Monitor calls and get notifications integrated in a comprehensive reporting system.</p>
+		<p>
+		<b>Quick and hassle free set-up:</b>
+		No assembly or hardware installations - just sign up and sign in.</p>
       </div>
     </div>
   </div>
@@ -509,11 +484,7 @@ html {
       <p>Digital Service</p>
     </div>
   </div>
-
-  <!-- Explanation Wrapper -->
   <div class="explanation-wrapper">
-
-    <!-- CEM -->
     <div class="explanation-content" id="cem">
       <div class="explanation-image">
         <img src="images/1.png" alt="Customer Experience Image" />
@@ -531,8 +502,6 @@ Customer excellence range from responding to your customer's inquiries and solvi
 up to maintaining high customer satisfaction rates through personalized outsourced solutions.</p>
       </div>
     </div>
-
-    <!-- BOS -->
     <div class="explanation-content" id="bos" style="display: none;">
       <div class="explanation-image">
         <img src="images/2.png" alt="Back Office Image" />
@@ -547,8 +516,6 @@ by making a complete customization of the dashboard according to the requirement
 direct conversations, email management, and WhatsApp requests for more than 8 languages.</p>
       </div>
     </div>
-
-    <!-- Digital -->
     <div class="explanation-content" id="digital" style="display: none;">
       <div class="explanation-image">
         <img src="images/3.png" alt="Digital Services Image" />
@@ -561,37 +528,27 @@ direct conversations, email management, and WhatsApp requests for more than 8 la
     on social media conversations across multiple platforms including Facebook, Twitter, Instagram, LinkedIn, etc. 
     and extends to virtually all public data on open blogs, forums, and micro websites, with the ability to flag the top influencers,
     trending topics, sentiment analysis and a lot more including deep profiling of online communities that exceed the traditional demographic analysis.</p>
-      </div>
     </div>
-
+   </div>
   </div>
 </div>
-
   <%- include('partials/footer') %>
 </body>
 </html>
 <script>
 function showContent(id) {
-    // Hide all explanation-content divs
     document.querySelectorAll(".explanation-content").forEach(el => {
       el.style.display = "none";
     });
-
-    // Show the selected one
     const target = document.getElementById(id);
     if (target) target.style.display = "flex";
   }
-
-  // Optional: Show default one on page load
   window.onload = () => showContent('cem');
 
 function showSection(id) {
-    // Hide all sections
     document.querySelectorAll('.section').forEach(section => {
       section.classList.remove('active');
     });
-
-    // Show the selected section
     document.getElementById(id).classList.add('active');
   }
   function openVideo() {
