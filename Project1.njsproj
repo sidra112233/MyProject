@@ -30,8 +30,11 @@
   <ItemGroup>
     <Content Include="db.js" />
     <Content Include="login.js" />
+    <Content Include="public\css\inbound.css" />
     <Content Include="views\about.ejs" />
+    <Content Include="views\customers\list.ejs" />
     <Content Include="views\dashboard.ejs" />
+    <Content Include="views\inbound\calls.ejs" />
     <Content Include="views\login.ejs" />
     <Content Include="views\partials\chatbot.ejs" />
     <Content Include="views\digital.ejs" />
@@ -54,7 +57,10 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="public\" />
+    <Folder Include="public\css\" />
     <Folder Include="views\" />
+    <Folder Include="views\inbound\" />
+    <Folder Include="views\customers\" />
     <Folder Include="views\partials\" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsToolsV2.targets" />

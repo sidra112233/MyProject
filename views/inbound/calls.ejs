@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Inbound Calls</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #fdfdfd;
+      margin: 0;
+      padding: 0;
+    }
+
+    .header {
+      background-color: #0f172a; /* Dark Slate */
+      color: #fff;
+      padding: 25px 0;
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    }
+
+    .header h1 {
+      margin: 0;
+      font-size: 28px;
+      letter-spacing: 1px;
+    }
+
+    .filter-section {
+      background-color: #ffffff;
+      padding: 30px;
+      margin: 30px auto;
+      max-width: 1100px;
+      border-radius: 12px;
+      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.08);
+    }
+
+    .filters {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .filter-item label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: #1e293b;
+    }
+
+    .filter-item select,
+    .filter-item input {
+      width: 100%;
+      padding: 10px;
+      font-size: 14px;
+      border-radius: 8px;
+      border: 1px solid #cbd5e1;
+      background-color: #f1f5f9;
+      color: #0f172a;
+      transition: border-color 0.3s;
+    }
+
+    .filter-item select:focus,
+    .filter-item input:focus {
+      border-color: #14b8a6;
+      outline: none;
+    }
+
+    .duration-row {
+      display: flex;
+      gap: 10px;
+    }
+
+    .submit-btn {
+      grid-column: span 2;
+      text-align: right;
+    }
+
+    .submit-btn button {
+      background-color: #14b8a6;
+      color: #fff;
+      padding: 12px 28px;
+      font-weight: 600;
+      font-size: 15px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .submit-btn button:hover {
+      background-color: #0d9488;
+    }
+
+    @media (max-width: 768px) {
+      .submit-btn {
+        text-align: center;
+        grid-column: span 1;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="header">
+    <h1><i class="fas fa-headset"></i> Inbound Calls Dashboard</h1>
+  </div>
+
+  <div class="filter-section">
+    <form class="filters">
+      <div class="filter-item">
+        <label><i class="fas fa-user"></i> Customer</label>
+        <select>
+          <option>All Customers</option>
+        </select>
+      </div>
+      <div class="filter-item">
+        <label><i class="fas fa-phone-alt"></i> Type</label>
+        <select>
+          <option>All Types</option>
+        </select>
+      </div>
+      <div class="filter-item">
+        <label><i class="fas fa-clock"></i> Duration (sec)</label>
+        <div class="duration-row">
+          <select>
+            <option>&gt;</option>
+            <option>&lt;</option>
+          </select>
+          <input type="number" placeholder="Time" />
+        </div>
+      </div>
+      <div class="filter-item">
+        <label><i class="fas fa-search"></i> Search</label>
+        <input type="text" placeholder="Search calls..." />
+      </div>
+      <div class="filter-item">
+        <label><i class="fas fa-language"></i> Language</label>
+        <select>
+          <option>All Languages</option>
+        </select>
+      </div>
+      <div class="filter-item">
+        <label><i class="fas fa-calendar"></i> Date</label>
+        <input type="text" placeholder="2025-07-17 - 2025-07-17" disabled />
+      </div>
+      <div class="filter-item">
+        <label><i class="fas fa-globe"></i> Country</label>
+        <select>
+          <option>All Countries</option>
+        </select>
+      </div>
+      <div class="filter-item">
+        <label><i class="fas fa-check-circle"></i> Status</label>
+        <select>
+          <option>Saved</option>
+        </select>
+      </div>
+      <div class="submit-btn">
+        <button type="submit"><i class="fas fa-filter"></i> Apply Filters</button>
+      </div>
+    </form>
+  </div>
+
+</body>
+</html>
