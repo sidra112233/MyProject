@@ -1,15 +1,195 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login</title>
+  <link rel="stylesheet" href="/bootstrap/css/bootstrap.min.css">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #0b0f2a, #1c2541);
+      overflow: hidden;
+    }
+    #particles-js {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+    .login-container {
+      position: relative;
+      z-index: 1;
+      width: 90%;
+      max-width: 400px;
+      margin: auto;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(14, 23, 52, 0.9);
+      padding: 2.5rem 2rem;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 12px 35px rgba(0, 0, 0, 0.4);
+      color: #fff;
+    }
+    h2 {
+      text-align: center;
+      margin-bottom: 2rem;
+      font-weight: 600;
+      font-size: 1.75rem;
+    }
+    .form-group {
+      position: relative;
+      margin-bottom: 1.8rem;
+    }
+    .form-control {
+      width: 100%;
+      background: transparent;
+      border: none;
+      border-bottom: 2px solid #6c8bbf;
+      color: #fff;
+      font-size: 16px;
+      padding: 0.75rem 0.5rem 0.25rem;
+    }
+    .form-control:focus {
+      border-color: #3c96ff;
+      box-shadow: none;
+    }
+    .form-group label {
+      position: absolute;
+      left: 0.5rem;
+      top: 0.75rem;
+      pointer-events: none;
+      transition: 0.3s ease;
+      color: #9ca7c5;
+    }
+    .form-control:focus + label,
+    .form-control:not(:placeholder-shown) + label {
+      top: -0.75rem;
+      font-size: 0.8rem;
+      color: #3c96ff;
+      background: rgba(11, 15, 42, 0.9);
+      padding: 0 4px;
+    }
+    .toggle-password {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #9ca7c5;
+      cursor: pointer;
+    }
+    .btn-submit {
+      background: linear-gradient(to right, #2e6de7, #3c96ff);
+      border: none;
+      border-radius: 30px;
+      width: 100%;
+      padding: 0.75rem;
+      color: #fff;
+      font-weight: 600;
+      font-size: 16px;
+      transition: opacity 0.3s ease;
+    }
+    .btn-submit:hover {
+      opacity: 0.9;
+    }
+    @media (max-width: 480px) {
+      .login-container {
+        padding: 2rem 1.5rem;
+      }
+      h2 {
+        font-size: 1.5rem;
+      }
+      .form-control {
+        font-size: 14px;
+      }
+      .btn-submit {
+        font-size: 14px;
+        padding: 0.65rem;
+      }
+    }
+    .icon-input {
+  position: absolute;
+  top: 50%;
+  left: 10px;
+  transform: translateY(-50%);
+  color: #9ca7c5;
+  pointer-events: none;
+}
+
+.form-control.pl-4 {
+  padding-left: 2rem !important;
+}
+
+  </style>
 </head>
 <body>
-  <h2>Login Form</h2>
- <form action="/login" method="POST">
-  <input type="email"    name="email"    placeholder="Email"    required />
-  <input type="password" name="password" placeholder="Password" required />
-  <button type="submit">Login</button>
+  <div id="particles-js"></div>
+  <div class="login-container">
+    <h2>Sign-in</h2>
+   <form action="/login" method="POST">
+  <div class="form-group position-relative">
+    <i class="fas fa-user icon-input"></i>
+    <input type="text" name="identifier" id="identifier" class="form-control pl-4"  required>
+    <label for="identifier">Username or Email</label>
+  </div>
+
+  <div class="form-group position-relative">
+    <i class="fas fa-lock icon-input"></i>
+    <input type="password" name="password" id="password" class="form-control pl-4"  required>
+    <label for="password">Password</label>
+    <i class="fas fa-eye toggle-password" id="togglePassword"></i>
+  </div>
+
+  <button type="submit" class="btn btn-submit">Sign in</button>
 </form>
 
+  </div>
+  <script src="/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+  <script>
+    document.getElementById("togglePassword").addEventListener("click", function () {
+      const pwd = document.getElementById("password");
+      const type = pwd.getAttribute("type") === "password" ? "text" : "password";
+      pwd.setAttribute("type", type);
+      this.classList.toggle("fa-eye-slash");
+    });
+
+    particlesJS("particles-js", {
+      particles: {
+        number: { value: 75 },
+        color: { value: "#ffffff" },
+        shape: { type: "circle" },
+        opacity: { value: 0.3 },
+        size: { value: 3 },
+        line_linked: {
+          enable: true,
+          distance: 140,
+          color: "#ffffff",
+          opacity: 0.25,
+          width: 1
+        },
+        move: {
+          enable: true,
+          speed: 2
+        }
+      },
+      interactivity: {
+        events: {
+          onhover: { enable: true, mode: "repulse" },
+          onclick: { enable: true, mode: "push" }
+        },
+        modes: {
+          repulse: { distance: 80 },
+          push: { particles_nb: 4 }
+        }
+      },
+      retina_detect: true
+    });
+  </script>
 </body>
 </html>

@@ -5,6 +5,7 @@ const db = require('./db');
 const session = require('express-session');
 const app = express();
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/bootstrap', express.static(__dirname + '/node_modules/bootstrap/dist'));
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
 app.use(express.urlencoded({ extended: true }));
@@ -47,15 +48,31 @@ app.get('/dashboard', (req, res) => {
     });
 });
 app.get('/inbound/calls', (req, res) => {
-    const query = `SELECT * FROM inbound_calls`;
-    db.query(query, (err, results) => {
-        if (err) {
-            console.error('Query error:', err);
-            return res.status(500).send('Server Error');
-        }
-        res.render('inbound/calls', { calls: results });
+    const selectedCustomer = req.query.customer;
+
+    let sql = 'SELECT * FROM inbound_calls';
+    const values = [];
+
+    if (selectedCustomer) {
+        sql += ' WHERE customer_name = ?';
+        values.push(selectedCustomer);
+    }
+
+    db.query(sql, values, (err, results) => {
+        if (err) throw err;
+
+        db.query('SELECT DISTINCT customer_name FROM inbound_calls', (err2, customers) => {
+            if (err2) throw err2;
+
+            res.render('inbound/calls', {
+                calls: results,
+                customers,
+                selectedCustomer: req.query.customer || ''
+            });
+        });
     });
 });
+
 app.get('/customers/list', (req, res) => {
     const query = `SELECT * FROM lists`;
     db.query(query, (err, results) => {

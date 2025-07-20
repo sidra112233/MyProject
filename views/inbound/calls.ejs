@@ -1,167 +1,136 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Inbound Calls</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <meta charset="UTF-8" />
+  <title>Inbound Calls Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+
   <style>
     body {
       font-family: 'Inter', sans-serif;
-      background-color: #fdfdfd;
-      margin: 0;
-      padding: 0;
+      background: #f4f7fa;
+      color: #333;
     }
-
-    .header {
-      background-color: #0f172a; /* Dark Slate */
+    .hero {
+      background: linear-gradient(135deg, #1e3a8a, #14b8a6);
       color: #fff;
-      padding: 25px 0;
+      padding: 60px 20px;
       text-align: center;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
     }
-
-    .header h1 {
-      margin: 0;
-      font-size: 28px;
-      letter-spacing: 1px;
+    .hero h1 {
+      font-weight: 700;
+      font-size: 2.5rem;
     }
-
-    .filter-section {
-      background-color: #ffffff;
-      padding: 30px;
-      margin: 30px auto;
-      max-width: 1100px;
+    .sidebar {
+      background: #fff;
       border-radius: 12px;
-      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.08);
+      padding: 20px;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.05);
     }
-
-    .filters {
+    .card-container {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
       gap: 20px;
     }
-
-    .filter-item label {
-      display: block;
-      font-weight: 600;
-      margin-bottom: 6px;
-      color: #1e293b;
+    .call-card {
+      background: #fff;
+      border-radius: 14px;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+      padding: 20px;
+      transition: transform 0.2s ease;
     }
-
-    .filter-item select,
-    .filter-item input {
-      width: 100%;
-      padding: 10px;
-      font-size: 14px;
-      border-radius: 8px;
-      border: 1px solid #cbd5e1;
-      background-color: #f1f5f9;
-      color: #0f172a;
-      transition: border-color 0.3s;
+    .call-card:hover {
+      transform: translateY(-4px);
     }
-
-    .filter-item select:focus,
-    .filter-item input:focus {
-      border-color: #14b8a6;
-      outline: none;
+    .badge-success {
+      background-color: #22c55e !important;
     }
-
-    .duration-row {
-      display: flex;
-      gap: 10px;
+    .badge-failed {
+      background-color: #ef4444 !important;
     }
-
-    .submit-btn {
-      grid-column: span 2;
-      text-align: right;
-    }
-
-    .submit-btn button {
-      background-color: #14b8a6;
-      color: #fff;
-      padding: 12px 28px;
-      font-weight: 600;
-      font-size: 15px;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-
-    .submit-btn button:hover {
-      background-color: #0d9488;
-    }
-
-    @media (max-width: 768px) {
-      .submit-btn {
-        text-align: center;
-        grid-column: span 1;
-      }
+    .toggle-btn {
+      margin-bottom: 20px;
     }
   </style>
 </head>
 <body>
 
-  <div class="header">
-    <h1><i class="fas fa-headset"></i> Inbound Calls Dashboard</h1>
-  </div>
+  <section class="hero">
+    <h1><i class="fas fa-headset"></i> Inbound Calls </h1>
+    <p>Review all recent inbound calls and filter with ease.</p>
+  </section>
 
-  <div class="filter-section">
-    <form class="filters">
-      <div class="filter-item">
-        <label><i class="fas fa-user"></i> Customer</label>
-        <select>
-          <option>All Customers</option>
-        </select>
-      </div>
-      <div class="filter-item">
-        <label><i class="fas fa-phone-alt"></i> Type</label>
-        <select>
-          <option>All Types</option>
-        </select>
-      </div>
-      <div class="filter-item">
-        <label><i class="fas fa-clock"></i> Duration (sec)</label>
-        <div class="duration-row">
-          <select>
-            <option>&gt;</option>
-            <option>&lt;</option>
-          </select>
-          <input type="number" placeholder="Time" />
+  <div class="container my-5">
+    <div class="row">
+      <!-- Filter Sidebar -->
+      <aside class="col-lg-3 mb-4">
+        <button class="btn btn-outline-secondary w-100 toggle-btn" type="button" data-bs-toggle="collapse" data-bs-target="#filterPanel">
+          <i class="fas fa-filter"></i> Show Filters
+        </button>
+        <div id="filterPanel" class="collapse show sidebar">
+         <form class="row g-3" method="GET" action="/inbound/calls">
+            <div class="col-12">
+              <label class="form-label"><i class="fas fa-user"></i> Customer</label>
+        <select class="form-select" name="customer">
+  <option value="">All Customers</option>
+  <% customers.forEach(c => { %>
+    <option value="<%= c.customer_name %>" <%= (c.customer_name === selectedCustomer) ? 'selected' : '' %>><%= c.customer_name %></option>
+  <% }); %>
+</select>
+
+<!-- (Optional) Add more inputs with name="duration" and name="date" -->
+
+            </div>
+            <div class="col-12">
+              <label class="form-label"><i class="fas fa-clock"></i> Duration</label>
+              <div class="input-group">
+                <select class="form-select w-25">
+                  <option>&gt;</option>
+                  <option>&lt;</option>
+                </select>
+                <input class="form-control" type="number" placeholder="sec" />
+              </div>
+            </div>
+            <div class="col-12">
+              <label class="form-label"><i class="fas fa-calendar"></i> Date</label>
+              <input class="form-control" type="date" />
+            </div>
+            <div class="col-12 text-end">
+              <button class="btn btn-primary w-100" type="submit"><i class="fas fa-filter"></i> Apply Filters</button>
+            </div>
+          </form>
+        </div>
+      </aside>
+
+      <!-- Cards Section -->
+      <div class="col-lg-9">
+        <div class="card-container">
+          <% if (calls.length > 0) { %>
+            <% calls.forEach(call => { %>
+              <div class="call-card">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <span class="badge <%= call.status === 'Saved' ? 'badge-success' : 'badge-failed' %>">
+                    <i class="fas fa-phone-alt"></i> <%= call.type %>
+                  </span>
+                  <span class="text-muted"><%= new Date(call.date_time).toLocaleString() %></span>
+                </div>
+                <h5 class="mb-2">Customer: <strong><%= call.customer_name %></strong></h5>
+                <p><i class="fas fa-clock"></i> Duration: <strong><%= call.duration %> sec</strong></p>
+                <p><i class="fas fa-check-circle"></i> Status: <strong><%= call.status %></strong></p>
+              </div>
+            <% }) %>
+          <% } else { %>
+            <p>No inbound calls found.</p>
+          <% } %>
         </div>
       </div>
-      <div class="filter-item">
-        <label><i class="fas fa-search"></i> Search</label>
-        <input type="text" placeholder="Search calls..." />
-      </div>
-      <div class="filter-item">
-        <label><i class="fas fa-language"></i> Language</label>
-        <select>
-          <option>All Languages</option>
-        </select>
-      </div>
-      <div class="filter-item">
-        <label><i class="fas fa-calendar"></i> Date</label>
-        <input type="text" placeholder="2025-07-17 - 2025-07-17" disabled />
-      </div>
-      <div class="filter-item">
-        <label><i class="fas fa-globe"></i> Country</label>
-        <select>
-          <option>All Countries</option>
-        </select>
-      </div>
-      <div class="filter-item">
-        <label><i class="fas fa-check-circle"></i> Status</label>
-        <select>
-          <option>Saved</option>
-        </select>
-      </div>
-      <div class="submit-btn">
-        <button type="submit"><i class="fas fa-filter"></i> Apply Filters</button>
-      </div>
-    </form>
+    </div>
   </div>
 
+  <!-- Bootstrap Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
