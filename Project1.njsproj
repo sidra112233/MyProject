@@ -11,7 +11,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>fcd5301d-e65c-4472-95a8-20352baeeb0b</ProjectGuid>
     <ProjectHome>.</ProjectHome>
-    <StartupFile>login.js</StartupFile>
+    <StartupFile>server.js</StartupFile>
     <SearchPath>
     </SearchPath>
     <WorkingDirectory>.</WorkingDirectory>

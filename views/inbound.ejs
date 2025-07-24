@@ -6,25 +6,44 @@
   <title>Inbound Call Packages</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
   <style>
     body {
       font-family: 'Segoe UI', sans-serif;
-      background-color: #f9f9f9;
+      margin: 0;
+      background: linear-gradient(-45deg, #dbeafe, #d8f3dc, #ffe5b4, #fad2e1);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
     }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
     .pricing-card {
-      transition: transform 0.3s ease;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
     }
     .pricing-card:hover {
-      transform: translateY(-10px);
+      transform: scale(1.05);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
     }
+
     .card-title {
-      font-size: 1.5rem;
-      font-weight: bold;
+      font-size: 1.7rem;
+      font-weight: 700;
+    }
+    .card-body {
+      padding: 2rem;
     }
     .feature-table {
       width: 100%;
       border-collapse: collapse;
+      border-radius: 10px;
+      overflow: hidden;
     }
     .feature-table th, .feature-table td {
       border: 1px solid #dee2e6;
@@ -32,7 +51,8 @@
       text-align: center;
     }
     .feature-table th {
-      background-color: #f1f1f1;
+      background-color: #495057;
+      color: white;
       font-weight: bold;
     }
     .feature-table tr:nth-child(even) {
@@ -41,17 +61,39 @@
     .tick {
       color: green;
       font-size: 1.2rem;
+    }
+    .xmark {
+      color: red;
+      font-size: 1.2rem;
+    }
+    h2, h4 {
+      font-weight: 700;
+      color: #343a40;
+    }
+    .btn {
+      transition: transform 0.2s ease-in-out;
+    }
+    .btn:hover {
+      transform: scale(1.05);
+    }
+    .table-responsive {
+      overflow-x: auto;
+      margin-top: 20px;
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+    }
   </style>
 </head>
 <body>
   <%- include('partials/navbar') %>
+
   <div class="container py-5">
     <h2 class="text-center mb-5 animate__animated animate__fadeInDown">Choose Your Package</h2>
     <div class="row text-center">
 
-      <!-- Silver Plan -->
-      <div class="col-md-3 mb-4 animate__animated animate__fadeInLeft">
-        <div class="card pricing-card">
+      <div class="col-md-3 mb-4">
+        <div class="card pricing-card bg-white animate__animated animate__zoomIn">
           <div class="card-body">
             <h5 class="card-title text-primary">SILVER</h5>
             <p>Small Companies</p>
@@ -61,9 +103,8 @@
         </div>
       </div>
 
-      <!-- Gold Plan -->
-      <div class="col-md-3 mb-4 animate__animated animate__fadeInUp">
-        <div class="card pricing-card">
+      <div class="col-md-3 mb-4">
+        <div class="card pricing-card bg-white animate__animated animate__zoomIn animate__delay-1s">
           <div class="card-body">
             <h5 class="card-title text-warning">GOLD</h5>
             <p>Medium Sized Companies</p>
@@ -73,9 +114,8 @@
         </div>
       </div>
 
-      <!-- Platinum Plan -->
-      <div class="col-md-3 mb-4 animate__animated animate__fadeInUp">
-        <div class="card pricing-card">
+      <div class="col-md-3 mb-4">
+        <div class="card pricing-card bg-white animate__animated animate__zoomIn animate__delay-2s">
           <div class="card-body">
             <h5 class="card-title text-success">PLATINUM</h5>
             <p>Large Companies</p>
@@ -85,9 +125,8 @@
         </div>
       </div>
 
-      <!-- Diamond Plan -->
-      <div class="col-md-3 mb-4 animate__animated animate__fadeInRight">
-        <div class="card pricing-card">
+      <div class="col-md-3 mb-4">
+        <div class="card pricing-card bg-white animate__animated animate__zoomIn animate__delay-3s">
           <div class="card-body">
             <h5 class="card-title text-primary">DIAMOND</h5>
             <p>Large Enterprise</p>
@@ -98,14 +137,14 @@
       </div>
     </div>
 
-    <!-- Feature Table -->
     <div class="mt-5">
       <h4 class="text-center mb-4 animate__animated animate__fadeIn">FEATURES LIST</h4>
-      <div class="table-responsive">
-        <table class="table feature-table">
+      <p class="text-center">Features List <strong>ONCALL</strong> is offering a lot of new and exciting features. Below are the list of features provided by ONCALL. Choose any of the standard packages depending on your company needs. For custom quotes, contact us at <a href="mailto:info@on-call.ae">info@on-call.ae</a>.</p>
+      <div class="table-responsive animate__animated animate__fadeInUp">
+        <table class="feature-table">
           <thead>
             <tr>
-              <th>Feature</th>
+              <th>Features</th>
               <th>Silver</th>
               <th>Gold</th>
               <th>Platinum</th>
@@ -116,14 +155,14 @@
             <tr><td>Number FAQs</td><td>5</td><td>15</td><td>50</td><td>60</td></tr>
             <tr><td>24/7 Inbound Calls Limit</td><td>300</td><td>600</td><td>Unlimited</td><td>Unlimited</td></tr>
             <tr><td>24/7 Inbound Calls Minutes</td><td>1000</td><td>2000</td><td>5000</td><td>9000 Flexi</td></tr>
-            <tr><td>Dedicated Key Account Manager</td><td>$70</td><td>$80</td><td><i class="m-0 fa fa-check text-fail"></i></td><td><i class="fas fa-check"></i></td></tr>
+            <tr><td>Dedicated Key Account Manager</td><td><i class="fa fa-times text-danger"></i></td><td><i class="fa fa-times text-danger"></i></td><td><i class="fa fa-times text-danger"></i></td><td class="tick"><i class="fas fa-check"></i></td></tr>
             <tr><td>Languages</td><td>English/Urdu</td><td>English/Arabic/Urdu</td><td>English/Arabic/Urdu</td><td>Multilingual</td></tr>
             <tr><td>Call Recording Storage</td><td>1 month</td><td>3 month</td><td>6 month</td><td>Unlimited</td></tr>
             <tr><td>Call Forwarding</td><td class="tick"><i class="fas fa-check"></i></td><td class="tick"><i class="fas fa-check"></i></td><td class="tick"><i class="fas fa-check"></i></td><td class="tick"><i class="fas fa-check"></i></td></tr>
-            <tr><td>UAE Landline Number</td><td>$25</td><td>$35</td><td>$45</td><td>$55</td></tr>
-            <tr><td>Instant Email Notifications</td><td>$10</td><td>$15</td><td>$20</td><td>$25</td></tr>
-            <tr><td>Instant SMS Notifications</td><td>$15</td><td>$20</td><td>$25</td><td>$30</td></tr>
-            <tr><td>CRM Integration</td><i class="fa fa-times text-danger"></i></td><i class="fa fa-times text-danger"></i></td><td class="cross"><i class="fa fa-times text-danger"></i></td><td class="tick"><i class="fas fa-check"></i></td></tr>
+            <tr><td>UAE Landline Number</td><td>Default</td><td>Default</td><td>Default</td><td>Unique</td></tr>
+            <tr><td>Instant Email Notifications</td><td>Default</td><td>Default</td><td>Default</td><td>Customized</td></tr>
+            <tr><td>Instant SMS Notifications</td><td>Default</td><td>Default</td><td>Default</td><td>Customizeds</td></tr>
+            <tr><td>CRM Integration</td><td><i class="fa fa-times text-danger"></i></td><td><i class="fa fa-times text-danger"></i></td><td class="cross"><i class="fa fa-times text-danger"></i></td><td class="tick"><i class="fas fa-check"></i></td></tr>
             <tr><td>Live dashboard</td><td>2 Access</td><td>2 Access</td><td>Unlimited</td><td>Customized</td></tr>
             <tr><td>One Time Setup Fees / Monthly Subscription</td><td>2500</td><td>2500</td><td>2500</td><td>2500</td></tr>
             <tr><td>Free Setup Fees / Annual Subscription</td><td class="tick"><i class="fas fa-check"></i></td><td class="tick"><i class="fas fa-check"></i></td><td class="tick"><i class="fas fa-check"></i></td><td class="tick"><i class="fas fa-check"></i></td></tr>
@@ -137,13 +176,14 @@
             <tr><td>Live Statistics</td><td class="tick"><i class="fas fa-check"></i></td><td class="tick"><i class="fas fa-check"></i></td><td class="tick"><i class="fas fa-check"></i></td><td class="tick"><i class="fas fa-check"></i></td></tr>
             <tr><td>Live Call Reporting</td><td class="tick"><i class="fas fa-check"></i></td><td class="tick"><i class="fas fa-check"></i></td><td class="tick"><i class="fas fa-check"></i></td><td class="tick"><i class="fas fa-check"></i></td></tr>
             <tr><td>Quality Assurance</td><td class="tick"><i class="fas fa-check"></i></td><td class="tick"><i class="fas fa-check"></i></td><td class="tick"><i class="fas fa-check"></i></td><td class="tick"><i class="fas fa-check"></i></td></tr>
-        </tbody>
+       </tbody>
         </table>
       </div>
     </div>
   </div>
+
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
-	 <%- include('partials/footer') %>
+  <%- include('partials/footer') %>
 </body>
 </html>

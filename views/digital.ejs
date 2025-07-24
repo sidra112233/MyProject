@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Digital Packages</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 0;
+      background: linear-gradient(-45deg, #dbeafe, #d8f3dc, #ffe5b4, #fad2e1);
+      background-size: 400% 400%;
+      animation: gradientBG 15s ease infinite;
+    }
+
+    @keyframes gradientBG {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    .pricing-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    }
+    .pricing-card:hover {
+      transform: scale(1.05);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+    }
+
+    .card-title {
+      font-size: 1.7rem;
+      font-weight: 700;
+    }
+    .card-body {
+      padding: 2rem;
+    }
+    .feature-table {
+      width: 100%;
+      border-collapse: collapse;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .feature-table th, .feature-table td {
+      border: 1px solid #dee2e6;
+      padding: 0.75rem;
+      text-align: center;
+    }
+    .feature-table th {
+      background-color: #495057;
+      color: white;
+      font-weight: bold;
+    }
+    .feature-table tr:nth-child(even) {
+      background-color: #f8f9fa;
+    }
+    .tick {
+      color: green;
+      font-size: 1.2rem;
+    }
+    .xmark {
+      color: red;
+      font-size: 1.2rem;
+    }
+    h2, h4 {
+      font-weight: 700;
+      color: #343a40;
+    }
+    .btn {
+      transition: transform 0.2s ease-in-out;
+    }
+    .btn:hover {
+      transform: scale(1.05);
+    }
+    .table-responsive {
+      overflow-x: auto;
+      margin-top: 20px;
+      background: white;
+      border-radius: 10px;
+      padding: 20px;
+    }
+  </style>
+</head>
+<body>
+  <%- include('partials/navbar') %>
+
+  <div class="container py-5">
+    <h2 class="text-center mb-5 animate__animated animate__fadeInDown">Choose Your Package</h2>
+    <div class="row text-center">
+
+      <div class="col-md-3 mb-4">
+        <div class="card pricing-card bg-white animate__animated animate__zoomIn">
+          <div class="card-body">
+            <h5 class="card-title text-primary">SILVER</h5>
+            <p>Small Companies</p>
+            <h3 class="text-info">$459/mo</h3>
+            <button class="btn btn-outline-primary mt-3">Try Now</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3 mb-4">
+        <div class="card pricing-card bg-white animate__animated animate__zoomIn animate__delay-1s">
+          <div class="card-body">
+            <h5 class="card-title text-warning">GOLD</h5>
+            <p>Medium Sized Companies</p>
+            <h3 class="text-info">$810/mo</h3>
+            <button class="btn btn-outline-warning mt-3">Try Now</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3 mb-4">
+        <div class="card pricing-card bg-white animate__animated animate__zoomIn animate__delay-2s">
+          <div class="card-body">
+            <h5 class="card-title text-success">PLATINUM</h5>
+            <p>Large Companies</p>
+            <h3 class="text-info">$1620/mo</h3>
+            <button class="btn btn-outline-success mt-3">Try Now</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-3 mb-4">
+        <div class="card pricing-card bg-white animate__animated animate__zoomIn animate__delay-3s">
+          <div class="card-body">
+            <h5 class="card-title text-primary">DIAMOND</h5>
+            <p>Large Enterprise</p>
+            <h3 class="text-info">$2700/mo</h3>
+            <button class="btn btn-outline-primary mt-3">Try Now</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mt-5">
+      <h4 class="text-center mb-4 animate__animated animate__fadeIn">FEATURES LIST</h4>
+      <p class="text-center">Features List <strong>ONCALL</strong> is offering a lot of new and exciting features. Below are the list of features provided by ONCALL. Choose any of the standard packages depending on your company needs. For custom quotes, contact us at <a href="mailto:info@on-call.ae">info@on-call.ae</a>.</p>
+      <div class="table-responsive animate__animated animate__fadeInUp">
+        <table class="feature-table">
+          <thead>
+            <tr>
+              <th>Features</th>
+              <th>Silver</th>
+              <th>Gold</th>
+              <th>Platinum</th>
+              <th>Diamond</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>24/7 Web Chat Integration</td><td class="tick"><i class="fas fa-check"></i></td><td class="tick"><i class="fas fa-check"></i></td><td class="tick"><i class="fas fa-check"></i></td><td class="tick"><i class="fas fa-check"></i></td></tr>
+            <tr><td>24/7 Whatsapp Integration</td><td class="tick"><i class="fas fa-check"></i></td><td class="tick"><i class="fas fa-check"></i></td><td class="tick"><i class="fas fa-check"></i></td><td class="tick"><i class="fas fa-check"></i></td></tr>
+            <tr><td>24/7 Social Media Integration</td><td>Facebook, Instagram</td><td>Facebook, Instagram</td><td>Facebook, Instagram</td><td>Facebook, Instagram</td></tr>
+            <tr><td>24/7 Inbound Transaction Limit</td><td>250</td><td>500</td><td>900</td><td>1300</td></tr>
+            <tr><td>Languages</td><td>English</td><td>English</td><td>Multilingual Agents</td><td>Multilingual Agents</td></tr>
+            <tr><td>Data Security</td><td class="tick"><i class="fas fa-check"></i></td><td class="tick"><i class="fas fa-check"></i></td><td class="tick"><i class="fas fa-check"></i></td><td class="tick"><i class="fas fa-check"></i></td></tr>
+            <tr><td>Escalation</td><td><i class="fa fa-times text-danger"></i></td><td><i class="fa fa-times text-danger"></i></td><td>Sales/Support Inquiry</td><td>Sales/Support Inquiry</td></tr>
+            <tr><td>Chat Bot / Customize Response</td><td><i class="fa fa-times text-danger"></i></td><td><i class="fa fa-times text-danger"></i></td><td><i class="fa fa-times text-danger"></i></td><td class="tick"><i class="fas fa-check"></i></td></tr>
+            <tr><td>CRM Integration</td><td><i class="fa fa-times text-danger"></i></td><td><i class="fa fa-times text-danger"></i></td><td class="cross"><i class="fa fa-times text-danger"></i></td><td class="tick"><i class="fas fa-check"></i></td></tr>
+            <tr><td>Live dashboard</td><td>Unlimited Access</td><td>Unlimited Access</td><td>Unlimited Access</td><td>Unlimited Access</td></tr>
+            <tr><td>One Time Setup Fees / Monthly Subscription</td><td>2500</td><td>2500</td><td>2500</td><td>2500</td></tr>
+           </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+  <%- include('partials/footer') %>
+</body>
+</html>
