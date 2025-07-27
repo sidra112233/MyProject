@@ -73,16 +73,6 @@ app.get('/inbound/calls', (req, res) => {
     });
 });
 
-app.get('/customers/list', (req, res) => {
-    const query = `SELECT * FROM lists`;
-    db.query(query, (err, results) => {
-        if (err) {
-            console.error('Query error:', err);
-            return res.status(500).send('Server Error');
-        }
-        res.render('customers/list', { calls: results });
-    });
-});
 const PORT = 3000;
 app.listen(PORT, () => {
     console.log(`Server running at http://localhost:${PORT}/login`);
