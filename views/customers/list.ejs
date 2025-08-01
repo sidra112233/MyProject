@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Inbound Calls - Filters</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <title>Customers Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <style>
     body {
@@ -13,43 +13,24 @@
       padding: 0;
       color: #0f172a;
     }
-
-    .header {
-      background-color: #1e293b;
-      color: #fff;
-      text-align: center;
-      padding: 30px 20px;
-      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    }
-
-    .header h1 {
-      margin: 0;
-      font-size: 32px;
-      font-weight: 700;
-    }
-
-    .filter-section {
-      background-color: #ffffff;
-      max-width: 1100px;
-      margin: 40px auto;
-      padding: 40px 30px;
-      border-radius: 16px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
-    }
-
-    .filters {
+    .filter-bar {
+      max-width: 90%;
+      margin: 40px auto 20px;
+      padding: 30px;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.06);
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 25px;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 20px;
+      align-items: end;
     }
-
     .filter-item label {
-      display: block;
-      margin-bottom: 8px;
       font-weight: 600;
-      font-size: 15px;
+      margin-bottom: 6px;
+      display: block;
+      font-size: 14px;
     }
-
     .filter-item select,
     .filter-item input {
       width: 100%;
@@ -57,81 +38,210 @@
       border: 1px solid #cbd5e1;
       border-radius: 10px;
       background-color: #f1f5f9;
-      font-size: 15px;
+      font-size: 14px;
       color: #0f172a;
-      transition: 0.3s border-color;
     }
-
-    .filter-item select:focus,
-    .filter-item input:focus {
-      border-color: #14b8a6;
-      outline: none;
-    }
-
-    .submit-btn {
-      grid-column: span 2;
-      display: flex;
-      justify-content: flex-end;
-      margin-top: 20px;
-    }
-
     .submit-btn button {
-      background-color: #14b8a6;
-      color: #fff;
-      font-size: 16px;
-      padding: 12px 32px;
+      padding: 12px 28px;
+      background-color: #1d4ed8;
+      color: white;
       font-weight: 600;
       border: none;
       border-radius: 10px;
       cursor: pointer;
-      transition: background-color 0.3s ease;
     }
-
     .submit-btn button:hover {
-      background-color: #0d9488;
+      background-color: #1e40af;
     }
-
+    .data-table {
+      max-width: 90%;
+      margin: 20px auto 50px;
+      background-color: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 6px 24px rgba(0, 0, 0, 0.05);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    thead {
+      background-color: #f1f5f9;
+    }
+    th, td {
+      padding: 16px;
+      text-align: left;
+      font-size: 14px;
+      color: #0f172a;
+      border-bottom: 1px solid #e2e8f0;
+    }
+    .actions {
+      display: flex;
+      gap: 12px;
+    }
+    .actions i {
+      cursor: pointer;
+      color: #64748b;
+      transition: color 0.2s;
+    }
+    .actions i:hover {
+      color: #1d4ed8;
+    }
+    .loading {
+      text-align: center;
+      padding: 20px;
+      color: #64748b;
+    }
+    .error {
+      text-align: center;
+      padding: 20px;
+      color: #e11d48;
+    }
+    .validation-error {
+      color: #e11d48;
+      font-size: 12px;
+      margin-top: 4px;
+    }
+    .no-records {
+      text-align: center;
+      padding: 20px;
+      color: #64748b;
+    }
+    .debug-info {
+      margin: 20px auto;
+      max-width: 90%;
+      padding: 15px;
+      background-color: #f8f9fa;
+      border-radius: 8px;
+      border-left: 4px solid #1d4ed8;
+      font-family: monospace;
+      font-size: 14px;
+      white-space: pre-wrap;
+      display: none;
+    }
+    
+    /* Responsive adjustments */
     @media (max-width: 768px) {
-      .submit-btn {
-        grid-column: span 1;
-        justify-content: center;
+      .filter-bar {
+        grid-template-columns: 1fr;
+        padding: 20px;
+      }
+      .data-table {
+        overflow-x: auto;
+      }
+      table {
+        min-width: 600px;
       }
     }
   </style>
 </head>
 <body>
-
-  <div class="header">
-    <h1><i class="fas fa-headset"></i> Inbound Call Filters</h1>
-  </div>
-
-  <div class="filter-section">
-    <form class="filters" >
+  <form class="filter-form" id="filterForm">
+    <div class="filter-bar">
       <div class="filter-item">
-        <label for="customer"><i class="fas fa-user"></i> Customer</label>
-        <select id="customer" name="customer">
-          <option value="">All Customers</option>
-          <!-- You can inject customer options here dynamically -->
-          <option value="John Doe">John Doe</option>
-          <option value="Jane Smith">Jane Smith</option>
+        <label for="industry">Industry</label>
+        <select id="industry" name="industry">
+          <option value="">All Industries</option>
+          <option value="Ecommerce">Ecommerce</option>
+          <option value="Travel & Tourism">Travel & Tourism</option>
+          <option value="Medical Services">Medical Services</option>
         </select>
       </div>
-
       <div class="filter-item">
-        <label for="duration"><i class="fas fa-clock"></i> Duration (sec)</label>
-        <input type="number" id="duration" name="duration" placeholder="e.g. 60">
+        <label for="search">Search</label>
+        <input type="text" id="search" name="search" placeholder="Search customers" />
       </div>
-
       <div class="filter-item">
-        <label for="date"><i class="fas fa-calendar"></i> Date</label>
-        <input type="date" id="date" name="date">
+        <label for="start-date">Start Date</label>
+        <input type="date" id="start-date" name="start_date" />
+        <div id="start-date-error" class="validation-error"></div>
       </div>
-
+      <div class="filter-item">
+        <label for="end-date">End Date</label>
+        <input type="date" id="end-date" name="end_date" />
+        <div id="end-date-error" class="validation-error"></div>
+      </div>
       <div class="submit-btn">
-        <button type="submit"><i class="fas fa-filter"></i> Apply Filters</button>
+        <button type="submit"><i class="fas fa-search"></i> Submit</button>
       </div>
-    </form>
+    </div>
+  </form>
+  <div class="data-table">
+    <table>
+      <thead>
+        <tr>
+          <th>Company</th>
+          <th>Industry</th>
+          <th>DID Number</th>
+          <th>Added On</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody id="data-body">
+        <tr class="loading">
+          <td colspan="5">Loading data...</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
-
+  
+  <div id="debug-info" class="debug-info"></div>
+  
+  <script>
+    // Utility function to escape HTML to prevent XSS
+    function escapeHtml(unsafe) {
+      return unsafe
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+    async function fetchDashboardData() {
+    // Get form values
+    const industry = document.getElementById("industry").value;
+    const search = document.getElementById("search").value;
+    const startDate = document.getElementById("start-date").value;
+    const endDate = document.getElementById("end-date").value;
+    
+    // Build query parameters
+    const params = new URLSearchParams();
+    if (industry) params.append("industry", industry);
+    if (search) params.append("search", search);
+    if (startDate) params.append("start_date", startDate);
+    if (endDate) params.append("end_date", endDate);
+    
+    const tbody = document.getElementById("data-body");
+    const debugInfo = document.getElementById("debug-info");
+    
+    // Hide debug info initially
+    debugInfo.style.display = 'none';
+    
+    tbody.innerHTML = `<tr class="loading"><td colspan="5">Loading data...</td></tr>`;
+    
+    try {
+        const url = `/customers/list?${params.toString()}`;
+        console.log("Fetching URL:", url);
+        
+        const response = await fetch(url);
+        
+        if (!response.ok) {
+            throw new Error(`Server responded with ${response.status}: ${response.statusText}`);
+        }
+        
+        const data = await response.json();
+        console.log("Data received:", data);
+        
+        populateTable(data);
+    } catch (err) {
+        console.error("Error fetching data:", err);
+        tbody.innerHTML = `<tr class="error"><td colspan="5">Error loading data: ${err.message}</td></tr>`;
+        
+        // Show debug info
+        debugInfo.textContent = `Error details:\n${err.stack}`;
+        debugInfo.style.display = 'block';
+    }
+}
+  </script>
 </body>
 </html>

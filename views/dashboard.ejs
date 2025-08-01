@@ -15,32 +15,29 @@
   --oxford-blue: #0b2545;
   --powder-blue: #8da9c4;
   --mint-cream: #eef4ed;
-  --hover-highlight: var(--powder-blue); /* replaced yellow */
+  --hover-highlight: var(--powder-blue);
 }
-
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
-
 body {
   font-family: 'Poppins', sans-serif;
-    position: relative;
-      z-index: 0;
+  position: relative;
+  z-index: 0;
   overflow-x: hidden;
   display: flex;
+  flex-direction: column;
   min-height: 100vh;
   background: var(--mint-cream);
   color: var(--oxford-blue);
   transition: background 0.3s, color 0.3s;
 }
-
 body.dark-mode {
   background: #121212;
   color: #f0f0f0;
 }
-
 canvas#bg {
   position: fixed;
   top: 0;
@@ -48,277 +45,75 @@ canvas#bg {
   z-index: -1;
 }
 
-.sidebar {
-  position: sticky;
-  top: 0;
-  height: 100vh;
-  width: 240px;
-  background: var(--berkeley-blue);
-  color: white;
-  display: flex;
-  flex-direction: column;
-  padding: 30px 20px;
-  overflow-y: nowrap;
-  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
-  animation: slideInLeft 0.6s ease;
-  z-index: 10000;
-}
-
-@keyframes slideInLeft {
-  from { transform: translateX(-100%); opacity: 0; }
-  to { transform: translateX(0); opacity: 1; }
-}
-
-.sidebar h2 {
-  text-align: center;
-  margin-bottom: 30px;
-  font-size: 24px;
-  font-weight: 600;
-}
-
-.sidebar a,
-.sidebar .dropbtn {
-  color: white;
-  text-decoration: none;
-  margin: 10px 0;
-  padding: 10px;
-  border-radius: 6px;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-weight: 500;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  transition: background 0.3s ease;
-}
-
-.sidebar a:hover,
-.sidebar .dropbtn:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-  color: var(--powder-blue);
-}
-
-.dropdown {
-  position: relative;
-  z-index: 10000;
-}
-
-.dropdown-content {
-  display: none;
-  position: absolute;
-  left: 100%;
-  top: 0;
-  background-color: var(--mint-cream);
-  color:  var(--mint-cream);
-  min-width: 220px;
-  max-height: 300px;
-  overflow-y: auto;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
-  animation: fadeIn 0.3s ease-in-out;
-  border-radius: 8px;
-  z-index: 10001;
-}
-
-.dropdown-content a {
-  padding: 12px 18px;
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  text-decoration: none;
-  color: var(--oxford-blue);
-  font-size: 15px;
-  font-weight: 500;
-  transition: background-color 0.3s, color 0.3s;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-}
-
-.dropdown-content a:last-child {
-  border-bottom: none;
-}
-
-.dropdown-content a:hover {
-  background-color: var(--powder-blue);
-  color: var(--yale-blue);
-}
-
-.dropdown:hover .dropdown-content {
-  display: block;
-}
-
-/* Fade-in animation */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.main {
-  flex: 1;
-  padding: 40px;
-  animation: fadeIn 1s ease-in;
-  z-index: 1;
-}
-
-.header {
+/* Top Bar */
+.top-bar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 40px;
+  background: linear-gradient(135deg, #1e293b, #0f172a);
+  color: white;
+  padding: 0 24px;
+  height: 60px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
 }
 
-.header h1 {
-  font-size: 26px;
-  font-weight: 600;
-  color: var(--yale-blue);
-}
-
-.dark-mode .header h1 {
-  color: #fff;
-}
-
-.header-icons {
+.top-bar-left {
   display: flex;
   align-items: center;
   gap: 15px;
-  color: var(--oxford-blue);
 }
 
-.dark-mode .header-icons {
-  color: #fff;
-}
-
-.toggle-btn {
-  background: var(--oxford-blue);
-  color: white;
-  border: none;
-  padding: 8px 12px;
-  border-radius: 6px;
-  cursor: pointer;
+.top-bar-right {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 14px;
-}
-.section {
-  text-align: center;
-  position: relative;
-  margin-top: 50px;
-}
-.section h2 {
-  position: relative;
-  text-align: center;
-  font-size: 28px;
-  font-weight: 600;
-  color: var(--oxford-blue);
-   margin-top: 30px;
-  margin-bottom: 40px;
-  display: inline-block;
-  margin-left: auto;
-  margin-right: auto;
+  gap: 15px;
 }
 
-.section h2::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  bottom: -10px;
-  width: 100%;
+.dashboard-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Menu Toggle */
+.menu-toggle {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 24px;
+  height: 18px;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+.menu-toggle span {
+  display: block;
   height: 3px;
-  background-color: var(--yale-blue);
-}
-
-.section h2::before {
-  content: '';
-  position: absolute;
-  bottom: -12px;
-  left: 0;
-  width: 10px;
-  height: 10px;
-  background-color: var(--yale-blue);
-  border-radius: 50%;
-  animation: moveDotPingPong 2s infinite ease-in-out;
-}
-
-@keyframes moveDotPingPong {
-  0% {
-    left: 0%;
-  }
-  50% {
-    left: 100%;
-  }
-  100% {
-    left: 0%;
-  }
-}
-body.dark-mode.light-cards .card {
-  background-color: var(--mint-cream);
-  color: var(--oxford-blue);
-}
-.grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 30px;
-  align-items: stretch; /* optional: makes all cards same height */
-  justify-items: center; /* optional: center cards in their columns */
-}
-.card {
-  background-color: #1f2a44;
-  color: #ffffff;
-  padding: 20px;
-  border-radius: 12px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
-  text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.5s ease, color 0.5s ease;
-    max-width: 240px;
   width: 100%;
-  margin: 0 auto;
+  background-color: white;
+  border-radius: 3px;
+  transition: all 0.3s ease-in-out;
 }
 
-.card:hover {
-  transform: translateY(-8px) scale(1.02);
-  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.25);
-}
-.dark-mode .card {
-  background: var(--mint-cream);
-  color: var(--oxford-blue);
-}
-.card h3 {
-  margin-top: 10px;
-  font-size: 18px;
-  color: var(--powder-blue);
-    color: var(--yale-blue);
-
+.menu-toggle.active span:nth-child(1) {
+  transform: rotate(45deg) translate(5px, 5px);
 }
 
-.dark-mode .card h3 {
-  color: #fff;
+.menu-toggle.active span:nth-child(2) {
+  opacity: 0;
 }
 
-.icon {
-  font-size: 28px;
-  margin-bottom: 12px;
+.menu-toggle.active span:nth-child(3) {
+  transform: rotate(-45deg) translate(7px, -6px);
 }
 
-.teal { color: #00cfe8; }
-.purple { color: #6f42c1; }
-.red { color: #ff4b5c; }
-
-@media (max-width: 768px) {
-  .sidebar {
-    display: none;
-  }
- .main {
-  position: relative; /* Ensure it participates in stacking */
-  z-index: 1; /* Lower than dropdowns */
-  overflow: visible; /* Important: allow content to spill over */
-}
-}
+/* Profile Dropdown */
 .profile-dropdown {
   position: relative;
   display: inline-block;
@@ -327,26 +122,22 @@ body.dark-mode.light-cards .card {
 
 .profile-icon {
   font-size: 22px;
-  color: var(--oxford-blue);
+  color: white;
   transition: color 0.3s;
-}
-
-.dark-mode .profile-icon {
-  color: #fff;
 }
 
 .profile-menu {
   display: none;
   position: absolute;
   right: 0;
-  top: 30px;
-  background-color: var(--mint-cream);
+  top: 40px;
+  background-color: white;
   color: var(--oxford-blue);
   border-radius: 8px;
   box-shadow: 0 4px 12px rgba(0,0,0,0.15);
   padding: 10px 15px;
   min-width: 160px;
-  z-index: 1000;
+  z-index: 1002;
   animation: fadeIn 0.3s ease-in-out;
 }
 
@@ -387,138 +178,458 @@ body.dark-mode .profile-menu a:hover {
   color: #ffcc00;
 }
 
+/* Toggle Button */
+.toggle-btn {
+  background: var(--oxford-blue);
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 14px;
+  transition: all 0.3s ease;
+}
+
+.toggle-btn:hover {
+  background: var(--yale-blue);
+  transform: translateY(-2px);
+}
+/* Navbar */
+.navbar {
+  display: flex;
+  align-items: center;
+  background: linear-gradient(135deg, #1e293b, #0f172a);
+  color: white;
+  padding: 0 24px;
+  height: 60px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 60px;
+  z-index: 9999; /* Increased z-index */
+  overflow-x: visible; /* scrollable if too wide */
+  white-space: nowrap;
+}
+
+.navbar a {
+  color: #e2e8f0;
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.navbar a:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  transform: translateY(-2px);
+}
+
+.navbar a i {
+  font-size: 1rem;
+}
+
+/* Dropdown Styles */
+.dropdown {
+  position: relative;
+  display: inline-block;
+  margin: 0 4px;
+  flex-shrink: 0;
+  z-index: 1100; /* ensure above other elements */
+}
+
+.dropbtn {
+  background: none;
+  border: none;
+  color: #e2e8f0;
+  padding: 8px 16px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.dropbtn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  transform: translateY(-2px);
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 8px;
+  background-color: white;
+  min-width: 220px;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+  z-index: 1200; /* higher than navbar and dropdown */
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dropdown-content a {
+  color: #334155;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  transition: all 0.2s ease;
+  background-color: white;
+}
+
+.dropdown-content a:hover {
+  background-color: #f1f5f9;
+  color: #1e40af;
+  transform: translateX(5px);
+}
+
+.dropdown-content a i {
+  width: 20px;
+  text-align: center;
+  color: #64748b;
+}
+
+.dropdown-content a:hover i {
+  color: #1e40af;
+}
+
+
+/* Main Content */
+.main {
+  flex: 1;
+  padding: 40px;
+  animation: fadeIn 1s ease-in;
+   z-index: 1;
+  position: relative;
+}
+
+.stats-container {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin-top: 10px;
+}
+
+.stats-section {
+  background: transparent;
+  border-radius: 16px;
+  padding: 30px;
+  transition: all 0.3s ease;
+  animation: slideUp 0.6s ease;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dark-mode .stats-section {
+  background: transparent;
+}
+
+.stats-section h2 {
+  position: relative;
+  text-align: center;
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--oxford-blue);
+  margin-bottom: 30px;
+  display: inline-block;
+  animation: fadeIn 1s ease;
+    left: 50%;
+  transform: translateX(-50%);
+}
+
+.dark-mode .stats-section h2 {
+  color: #fff;
+  text-align: center;  
+
+}
+
+.stats-section h2::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -10px;
+  width: 100%;
+  height: 3px;
+  background-color: var(--yale-blue);
+  text-align: center;  
+}
+
+.stats-section h2::before {
+  content: '';
+  position: absolute;
+  bottom: -12px;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  background-color: var(--yale-blue);
+  border-radius: 50%;
+  animation: moveDotPingPong 2s infinite ease-in-out;
+  text-align: center;  
+}
+
+@keyframes moveDotPingPong {
+  0% {
+    left: 0%;
+  }
+  50% {
+    left: 100%;
+  }
+  100% {
+    left: 0%;
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 30px;
+  align-items: stretch;
+  justify-items: center;
+}
+
+.card {
+  background-color: transparent;
+  color: var(--oxford-blue);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  transition: all 0.3s ease;
+  max-width: 240px;
+  width: 100%;
+  margin: 0 auto;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  animation: fadeInUp 0.8s ease;
+  animation-fill-mode: both;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+.dark-mode .card {
+  background: transparent;
+  color: #f0f0f0;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dark-mode .card:hover {
+  background: rgba(30, 30, 30, 0.2);
+}
+
+.card h3 {
+  margin-top: 10px;
+  font-size: 18px;
+  color: var(--yale-blue);
+}
+
+.dark-mode .card h3 {
+  color: #fff;
+}
+
+.icon {
+  font-size: 28px;
+  margin-bottom: 12px;
+  transition: all 0.3s ease;
+}
+
+.card:hover .icon {
+  transform: scale(1.2);
+}
+.teal { color: #134074; }
+.purple { color: #134074; }
+.red { color: #13315c; }
+
+.dark-mode .teal {
+  color: #8da9c4; 
+}
+
+.dark-mode .purple {
+  color: #8da9c4;
+}
+
+.dark-mode .red {
+  color: #eef4ed; 
+}
+@media (max-width: 768px) {
+  .top-bar, .navbar {
+    padding: 0 15px;
+  }
+  
+  .main {
+    padding: 20px 15px;
+  }
+  
+  .stats-container {
+    padding: 0;
+    gap: 20px;
+  }
+  
+  .stats-section {
+    padding: 20px;
+  }
+  
+  .grid {
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+  }
+  
+  .dashboard-title {
+    font-size: 1.2rem;
+  }
+  
+  .navbar {
+    overflow-x: scroll;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .navbar::-webkit-scrollbar {
+    height: 4px;
+  }
+  
+  .navbar::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+  }
+  
+  .navbar::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 2px;
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Dot for notification */
+.dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #ff4b5c;
+  margin-left: 5px;
+}
   </style>
 </head>
 <body>
-  <canvas id="bg"></canvas>
- <div class="sidebar">
-    <h2>Dashboard</h2>
-    <a href="/dashboard"><i class="fas fa-chart-line"></i> Dashboard</a>
-
-    <div class="dropdown">
-      <button class="dropbtn"><i class="fas fa-phone-incoming"></i> Inbound <i class="fas fa-caret-down"></i></button>
-      <div class="dropdown-content">
-        <a href="/inbound/calls"><i class="fas fa-phone"></i> Calls</a>
-        <a href="/inbound/review"><i class="fas fa-star"></i> Review</a>
-        <a href="/inbound/notes"><i class="fas fa-sticky-note"></i> Notes</a>
-        <a href="/inbound/add"><i class="fas fa-plus-circle"></i> Add New</a>
-        <a href="/inbound/callbacks"><i class="fas fa-redo-alt"></i> Call Backs</a>
-        <a href="/inbound/missed"><i class="fas fa-phone-slash"></i> Missed Calls</a>
+ <%- include('partials/dashboardnav') %>
+  <main class="main">
+    <div class="stats-container">
+      <div class="stats-section">
+        <h2 class="center">Inbound Statistics</h2>
+        <div class="grid">
+          <div class="card">
+            <div class="icon teal"><i class="fas fa-phone-volume"></i></div>
+            <div><strong><%= stats.total_inbound %></strong><br/>Total Inbound</div>
+          </div>
+          <div class="card">
+            <div class="icon red"><i class="fas fa-calendar-day"></i></div>
+            <div><strong><%= stats.inbound_today %></strong><br/>Inbound Today</div>
+          </div>
+          <div class="card">
+            <div class="icon teal"><i class="fas fa-tasks"></i></div>
+            <div><strong><%= stats.unsaved_total %></strong><br/>Unsaved Total</div>
+          </div>
+          <div class="card">
+            <div class="icon red"><i class="fas fa-hourglass-half"></i></div>
+            <div><strong><%= stats.unsaved_today %></strong><br/>Unsaved Today</div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="stats-section">
+        <h2>Outbound Statistics</h2>
+        <div class="grid">
+          <div class="card">
+            <div class="icon purple"><i class="fas fa-phone-volume"></i></div>
+            <div><strong><%= stats.total_outbound %></strong><br/>Total Outbound</div>
+          </div>
+          <div class="card">
+            <div class="icon purple"><i class="fas fa-calendar-alt"></i></div>
+            <div><strong><%= stats.outbound_today %></strong><br/>Outbound Today</div>
+          </div>
+        </div>
       </div>
     </div>
-
-    <div class="dropdown">
-      <button class="dropbtn"><i class="fas fa-phone-outgoing"></i> Outbound <i class="fas fa-caret-down"></i></button>
-      <div class="dropdown-content">
-        <a href="/outbound/leads"><i class="fas fa-user-plus"></i> Leads</a>
-        <a href="/outbound/calls"><i class="fas fa-phone"></i> Calls</a>
-        <a href="/outbound/tasks"><i class="fas fa-tasks"></i> Tasks</a>
-        <a href="/outbound/callbacks"><i class="fas fa-redo-alt"></i> Call Backs</a>
-      </div>
-    </div>
-
-    <div class="dropdown">
-      <button class="dropbtn"><i class="fas fa-users"></i> Customers </button>
-      <div class="dropdown-content">
-        <a href="/customers/lists"><i class="fas fa-list"></i> Lists</a>
-        <a href="/customers/accounts"><i class="fas fa-envelope"></i> Outlook Accounts</a>
-      </div>
-    </div>
-
-    <a href="/languages"><i class="fas fa-language"></i> Languages</a>
-
-    <div class="dropdown">
-      <button class="dropbtn"><i class="fas fa-calendar-check"></i> Attendance</button>
-      <div class="dropdown-content">
-        <a href="/attendance/history"><i class="fas fa-history"></i> History</a>
-        <a href="/attendance/update"><i class="fas fa-pen"></i> Add/Update</a>
-      </div>
-    </div>
-
-    <a href="/roster"><i class="fas fa-calendar-week"></i> Weekly Roster</a>
-  <div class="dropdown">
-  <button class="dropbtn">Chats <i class="fas fa-comments"></i></button>
-  <div class="dropdown-content">
-    <a href="/chats/dashboard"><i class="fas fa-tachometer-alt"></i> Dashboard</a>
-    <a href="/chats/messenger"><i class="fab fa-facebook-messenger"></i> Messenger</a>
-    <a href="/chats/fb-comments"><i class="fas fa-comment-alt"></i> FB Comments</a>
-    <a href="/chats/twitter"><i class="fab fa-twitter"></i> Twitter</a>
-    <a href="/chats/instagram"><i class="fab fa-instagram"></i> Instagram</a>
-    <a href="/chats/whatsapp"><i class="fab fa-whatsapp"></i> Whatsapp <span class="dot"></span></a>
-    <a href="/chats/wb-whatsapp"><i class="fab fa-whatsapp-square"></i> WB Whatsapp <span class="dot"></span></a>
-    <a href="/chats/outlook"><i class="fas fa-th"></i> Outlook Emails <span class="dot"></span></a>
-    <a href="/chats/gmail"><i class="far fa-envelope"></i> Google Emails <span class="dot"></span></a>
-    <a href="/chats/web-chat"><i class="fas fa-comments"></i> Web Chat <span class="dot"></span></a>
-    <a href="/chats/tickets"><i class="fas fa-ticket-alt"></i> Tickets</a>
-    <a href="/chats/haier-gulf"><i class="fas fa-industry"></i> Haier Gulf</a>
-  </div>
-</div>
-    <div class="dropdown">
-      <button class="dropbtn"><i class="fab fa-whatsapp"></i> WB Whatsapp </button>
-      <div class="dropdown-content">
-        <a href="/whatsapp/numbers"><i class="fas fa-hashtag"></i> Numbers</a>
-        <a href="/whatsapp/reviews"><i class="fas fa-star-half-alt"></i> Reviews</a>
-      </div>
-    </div>
-  </div>
-  <div class="main">
-    <div class="header">
-      <h1>Dashboard</h1>
-        <div class="header-icons">
-        <i class="fas fa-bell"></i>
-        <i class="fas fa-comment"></i>
-<div class="profile-dropdown">
-  <i class="fas fa-user-circle profile-icon" onclick="toggleProfileMenu()"></i>
-  <div class="profile-menu" id="profileMenu">
-    <span><%= user.username || user.email %></span>
-    <a href="/login">Logout</a>
-  </div>
-</div>
-
-
-        <button class="toggle-btn" onclick="toggleDarkMode()">
-          <i class="fas fa-moon"></i>
-        </button>
-      </div>
-    </div>
-
-    <div class="section">
-  <h2 class="animate-underline">Inbound Statistics</h2>
-    <div class="grid">
-      <div class="card">
-        <div class="icon teal"><i class="fas fa-phone-volume"></i></div>
-        <div><strong><%= stats.total_inbound %></strong><br/>Total Inbound</div>
-      </div>
-      <div class="card">
-        <div class="icon red"><i class="fas fa-calendar-day"></i></div>
-        <div><strong><%= stats.inbound_today %></strong><br/>Inbound Today</div>
-      </div>
-      <div class="card">
-        <div class="icon teal"><i class="fas fa-tasks"></i></div>
-        <div><strong><%= stats.unsaved_total %></strong><br/>Unsaved Total</div>
-      </div>
-      <div class="card">
-        <div class="icon red"><i class="fas fa-hourglass-half"></i></div>
-        <div><strong><%= stats.unsaved_today %></strong><br/>Unsaved Today</div>
-      </div>
-    </div>
-    <h2 class="animate-underline">Outbound Statistics</h2>
-    <div class="grid">
-      <div class="card">
-        <div class="icon purple"><i class="fas fa-phone-volume"></i></div>
-        <div><strong><%= stats.total_outbound %></strong><br/>Total Outbound</div>
-      </div>
-      <div class="card">
-        <div class="icon purple"><i class="fas fa-calendar-alt"></i></div>
-        <div><strong><%= stats.outbound_today %></strong><br/>Outbound Today</div>
-      </div>
-    </div>
-  </div>
+  </main>
+  
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   <script>
     function toggleDarkMode() {
       document.body.classList.toggle('dark-mode');
-       document.body.classList.toggle("light-cards");
+      const toggleBtn = document.querySelector('.toggle-btn i');
+      if (document.body.classList.contains('dark-mode')) {
+        toggleBtn.classList.remove('fa-moon');
+        toggleBtn.classList.add('fa-sun');
+      } else {
+        toggleBtn.classList.remove('fa-sun');
+        toggleBtn.classList.add('fa-moon');
+      }
     }
     
     // Animated background using particles
@@ -527,7 +638,6 @@ body.dark-mode .profile-menu a:hover {
     let w = canvas.width = window.innerWidth;
     let h = canvas.height = window.innerHeight;
     let particles = [];
-
     for(let i = 0; i < 80; i++) {
       particles.push({
         x: Math.random() * w,
@@ -536,7 +646,6 @@ body.dark-mode .profile-menu a:hover {
         vy: (Math.random() - 0.5) * 0.5
       });
     }
-
     function draw() {
       ctx.clearRect(0, 0, w, h);
       ctx.fillStyle = '#ffffff';
@@ -546,10 +655,8 @@ body.dark-mode .profile-menu a:hover {
         ctx.fill();
         p.x += p.vx;
         p.y += p.vy;
-
         if(p.x < 0 || p.x > w) p.vx *= -1;
         if(p.y < 0 || p.y > h) p.vy *= -1;
-
         for(let q of particles) {
           let dx = p.x - q.x;
           let dy = p.y - q.y;
@@ -566,22 +673,35 @@ body.dark-mode .profile-menu a:hover {
       requestAnimationFrame(draw);
     }
     draw();
-   window.addEventListener('DOMContentLoaded', () => {
-    document.querySelectorAll('.section h2').forEach(h2 => {
-      h2.classList.add('animate-underline');
+    
+    // Menu toggle functionality
+    const menuToggle = document.getElementById('menuToggle');
+    menuToggle.addEventListener('click', function() {
+      this.classList.toggle('active');
+      // Here you would toggle a mobile menu if needed
     });
-  });
-  function toggleProfileMenu() {
-    const menu = document.getElementById("profileMenu");
-    menu.classList.toggle("show");
-  }
-  window.addEventListener("click", function (e) {
-    const profile = document.querySelector(".profile-dropdown");
-    const menu = document.getElementById("profileMenu");
-    if (!profile.contains(e.target)) {
-      menu.classList.remove("show");
+    
+    // Profile dropdown functionality
+    function toggleProfileMenu() {
+      const menu = document.getElementById("profileMenu");
+      menu.classList.toggle("show");
     }
-  });
+    
+    window.addEventListener("click", function (e) {
+      const profile = document.querySelector(".profile-dropdown");
+      const menu = document.getElementById("profileMenu");
+      if (!profile.contains(e.target)) {
+        menu.classList.remove("show");
+      }
+    });
+    
+    // Add staggered animation to cards
+    document.addEventListener('DOMContentLoaded', function() {
+      const cards = document.querySelectorAll('.card');
+      cards.forEach((card, index) => {
+        card.style.animationDelay = `${index * 0.1}s`;
+      });
+    });
   </script>
 </body>
 </html>

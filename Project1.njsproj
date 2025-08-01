@@ -40,6 +40,7 @@
     <Content Include="views\digital.ejs" />
     <Content Include="views\government.ejs" />
     <Content Include="views\inbound.ejs" />
+    <Content Include="views\partials\dashboardnav.ejs" />
     <Content Include="views\partials\footer.ejs" />
     <Content Include="views\partials\navbar.ejs" />
     <Content Include="views\realestate.ejs" />
@@ -61,6 +62,7 @@
     <Folder Include="views\" />
     <Folder Include="views\inbound\" />
     <Folder Include="views\customers\" />
+    <Folder Include="views\chats\" />
     <Folder Include="views\partials\" />
   </ItemGroup>
   <Import Project="$(VSToolsPath)\Node.js Tools\Microsoft.NodejsToolsV2.targets" />
