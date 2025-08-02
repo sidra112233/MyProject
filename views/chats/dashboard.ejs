@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pending Chats Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <style>
+    :root {
+      --yale-blue: #134074;
+      --berkeley-blue: #13315c;
+      --oxford-blue: #0b2545;
+      --powder-blue: #8da9c4;
+      --mint-cream: #eef4ed;
+      --hover-highlight: var(--powder-blue);
+    }
+    
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #f9fafb;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      min-height: 100vh;
+    }
+    
+    /* Fix navbar positioning */
+    .navbar-fixed-top {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 1000;
+    }
+    
+    /* Sidebar Styles - More Compact */
+    .sidebar {
+      width: 240px; /* Reduced width */
+      background-color: white;
+      border-right: 1px solid #e2e8f0;
+      padding: 15px 10px; /* Reduced padding */
+      overflow-y: auto;
+      transition: all 0.3s ease;
+      margin-top: 0; /* Height of navbar */
+      height: calc(100vh - 60px);
+    }
+    
+    .sidebar-header {
+      margin-bottom: 15px; /* Reduced margin */
+      padding: 0 5px; /* Added padding */
+    }
+    
+    .sidebar-title {
+      font-size: 1.1rem; /* Reduced font size */
+      font-weight: 600;
+      color: var(--oxford-blue);
+      margin-bottom: 3px; /* Reduced margin */
+    }
+    
+    .sidebar-subtitle {
+      font-size: 0.8rem; /* Reduced font size */
+      color: #64748b;
+    }
+    
+    /* Platform Cards in Sidebar - More Compact */
+    .platform-card {
+      display: flex;
+      align-items: center;
+      padding: 10px 8px; /* Reduced padding */
+      border-radius: 8px; /* Reduced border radius */
+      margin-bottom: 0; /* Removed margin */
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: 1px solid transparent;
+      border-bottom: 1px solid #e2e8f0; /* Added separator */
+    }
+    
+    .platform-card:last-child {
+      border-bottom: none; /* Remove border from last item */
+    }
+    
+    .platform-card:hover {
+      background-color: #f1f5f9;
+      transform: translateX(3px); /* Reduced movement */
+    }
+    
+    .platform-card.active {
+      background-color: #eff6ff;
+      border-color: #3b82f6;
+      border-bottom: 1px solid #3b82f6; /* Match active border color */
+    }
+    
+    .platform-icon {
+      width: 32px; /* Reduced size */
+      height: 32px; /* Reduced size */
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px; /* Reduced font size */
+      color: white;
+      margin-right: 10px; /* Reduced margin */
+      flex-shrink: 0;
+    }
+    
+    .platform-info {
+      flex: 1;
+    }
+    
+    .platform-name {
+      font-weight: 600;
+      font-size: 0.9rem; /* Reduced font size */
+      margin-bottom: 1px; /* Reduced margin */
+    }
+    
+    .platform-count {
+      font-size: 0.75rem; /* Reduced font size */
+      color: #64748b;
+    }
+    
+    .platform-badge {
+      background-color: #ef4444;
+      color: white;
+      font-size: 0.7rem; /* Reduced font size */
+      font-weight: 600;
+      padding: 1px 6px; /* Reduced padding */
+      border-radius: 10px; /* Reduced border radius */
+      margin-left: 6px; /* Reduced margin */
+    }
+    
+    /* Main Content Area */
+    .main-content {
+      flex: 1;
+      padding: 20px;
+      margin-top: 60px; /* Height of navbar */
+      overflow-y: auto;
+      height: calc(100vh - 60px);
+    }
+    
+    .content-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    
+    .content-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--oxford-blue);
+    }
+    
+    .content-actions {
+      display: flex;
+      gap: 10px;
+    }
+    
+    .action-btn {
+      background: white;
+      border: 1px solid #e2e8f0;
+      border-radius: 6px;
+      padding: 8px 12px;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.875rem;
+      color: #64748b;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    
+    .action-btn:hover {
+      background-color: #f1f5f9;
+      color: var(--oxford-blue);
+    }
+    
+    /* Chat List */
+    .chat-list {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+    
+    .chat-item {
+      background-color: white;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+    
+    .chat-item:hover {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      transform: translateY(-2px);
+    }
+    
+    .chat-avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background-color: #f1f5f9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 15px;
+      flex-shrink: 0;
+      font-size: 1.2rem;
+      color: #64748b;
+    }
+    
+    .chat-details {
+      flex: 1;
+    }
+    
+    .chat-name {
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+    
+    .chat-preview {
+      font-size: 0.875rem;
+      color: #64748b;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 300px;
+    }
+    
+    .chat-meta {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 5px;
+    }
+    
+    .chat-time {
+      font-size: 0.75rem;
+      color: #94a3b8;
+    }
+    
+    .chat-status {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background-color: #ef4444;
+    }
+    
+    /* Empty State */
+    .empty-state {
+      text-align: center;
+      padding: 60px 20px;
+      color: #64748b;
+    }
+    
+    .empty-icon {
+      font-size: 64px;
+      margin-bottom: 20px;
+      color: #cbd5e1;
+    }
+    
+    .empty-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+      color: var(--oxford-blue);
+    }
+    
+    /* Mobile Responsive */
+    @media (max-width: 768px) {
+      body {
+        flex-direction: column;
+      }
+      
+      .sidebar {
+        width: 100%;
+        height: auto;
+        padding: 10px; /* Reduced padding for mobile */
+        border-right: none;
+        border-bottom: 1px solid #e2e8f0;
+      }
+      
+      .main-content {
+        height: auto;
+      }
+      
+      .chat-preview {
+        max-width: 200px;
+      }
+    }
+    
+    /* Loading Animation */
+    .loading-item {
+      display: flex;
+      align-items: center;
+      padding: 16px;
+      border-radius: 12px;
+      background-color: white;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      margin-bottom: 15px;
+    }
+    
+    .loading-avatar {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      background: linear-gradient(90deg, #f0f0f0, #e0e0e0, #f0f0f0);
+      background-size: 200% 100%;
+      animation: loading 1.5s infinite linear;
+      margin-right: 15px;
+    }
+    
+    .loading-details {
+      flex: 1;
+    }
+    
+    .loading-name {
+      height: 20px;
+      width: 120px;
+      background: linear-gradient(90deg, #f0f0f0, #e0e0e0, #f0f0f0);
+      background-size: 200% 100%;
+      animation: loading 1.5s infinite linear;
+      border-radius: 4px;
+      margin-bottom: 8px;
+    }
+    
+    .loading-preview {
+      height: 16px;
+      width: 200px;
+      background: linear-gradient(90deg, #f0f0f0, #e0e0e0, #f0f0f0);
+      background-size: 200% 100%;
+      animation: loading 1.5s infinite linear;
+      border-radius: 4px;
+    }
+    
+    @keyframes loading {
+      0% {
+        background-position: 200% 0;
+      }
+      100% {
+        background-position: -200% 0;
+      }
+    }
+    .dashboard-wrapper {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+  </style>
+</head>
+<body>
+  <%- include('../partials/dashboardnav') %>
+  <div class="dashboard-wrapper d-flex">
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <div class="sidebar-header">
+        <div class="sidebar-title">Chats</div>
+      </div>
+      <div id="platformsList">
+        <% const channels = [
+          { name: 'Facebook', icon: 'fab fa-facebook-messenger', color: '#3b5998' },
+          { name: 'Instagram', icon: 'fab fa-instagram', color: '#e1306c' },
+          { name: 'Whatsapp', icon: 'fab fa-whatsapp', color: '#25D366' },
+          { name: 'WBWhatsapp', icon: 'fab fa-whatsapp', color: '#107C41' },
+          { name: 'WebChats', icon: 'fas fa-comments', color: '#5b21b6' },
+          { name: 'Outlook', icon: 'fas fa-th-large', color: '#06b6d4' },
+          { name: 'Gmail', icon: 'fas fa-envelope', color: '#0f9d58' }
+        ]; %>
+
+        <% channels.forEach((channel, index) => { 
+          const count = platforms[channel.name] || 0;
+          const hasPending = count > 0;
+        %>
+          <div class="platform-card animate__animated animate__fadeInLeft" data-platform="<%= channel.name %>" style="animation-delay: <%= index * 0.1 %>s;">
+            <div class="platform-icon" style="background-color: <%= channel.color %>;">
+              <i class="<%= channel.icon %>"></i>
+            </div>
+            <div class="platform-info">
+              <div class="platform-name"><%= channel.name %></div>
+            </div>
+            <% if (hasPending) { %>
+              <span class="platform-badge"><%= count %></span>
+            <% } %>
+          </div>
+        <% }) %>
+      </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-content container-fluid mt-4">
+      <div class="content-header">
+        <div class="content-title" id="contentTitle">Select a platform</div>
+        <div class="content-actions">
+          <button class="action-btn" id="refreshBtn">
+            <i class="fas fa-sync-alt"></i> Refresh
+          </button>
+          <button class="action-btn" id="filterBtn">
+            <i class="fas fa-filter"></i> Filter
+          </button>
+        </div>
+      </div>
+
+      <div class="row">
+        <!-- Left column: Chat list -->
+        <div class="col-md-4 border-end">
+          <div class="chat-list" id="chatList"></div>
+        </div>
+
+        <!-- Right column: Chat content -->
+        <div class="col-md-8" id="chatContent">
+          <div class="empty-state text-center py-5">
+            <div class="empty-icon">
+              <i class="fas fa-comments fa-2x text-muted"></i>
+            </div>
+            <div class="empty-title mt-2">Select a chat to view conversation</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const platformCards = document.querySelectorAll('.platform-card');
+      const contentTitle = document.getElementById('contentTitle');
+      const chatList = document.getElementById('chatList');
+      const chatContent = document.getElementById('chatContent');
+      const refreshBtn = document.getElementById('refreshBtn');
+      const filterBtn = document.getElementById('filterBtn');
+
+      const mockChats = {
+        'Facebook': [
+          { id: 1, name: 'John Smith', preview: 'Hello, I need help with my order', time: '10:30 AM', status: 'unread' },
+          { id: 2, name: 'Sarah Johnson', preview: 'Can you tell me more about your products?', time: '9:15 AM', status: 'unread' }
+        ],
+        'Instagram': [
+          { id: 3, name: 'Emma Davis', preview: 'Love your latest post!', time: '11:45 AM', status: 'unread' }
+        ],
+        'Whatsapp': [
+          { id: 4, name: 'David Brown', preview: 'What are your business hours?', time: '2:20 PM', status: 'unread' }
+        ],
+        'WBWhatsapp': [
+          { id: 5, name: 'Robert Taylor', preview: 'When will my order arrive?', time: '3:45 PM', status: 'unread' }
+        ],
+        'WebChats': [
+          { id: 6, name: 'Guest User', preview: 'How do I create an account?', time: '4:30 PM', status: 'unread' }
+        ],
+        'Outlook': [
+          { id: 7, name: 'Customer Support', preview: 'Ticket #45782 has been resolved', time: '5:20 PM', status: 'unread' }
+        ],
+        'Gmail': [
+          { id: 8, name: 'Newsletter', preview: 'Check out our latest offers', time: '6:10 PM', status: 'unread' }
+        ]
+      };
+
+      function showLoadingState() {
+        chatList.innerHTML = '';
+        for (let i = 0; i < 3; i++) {
+          chatList.innerHTML += `
+            <div class="loading-item">
+              <div class="loading-avatar"></div>
+              <div class="loading-details">
+                <div class="loading-name"></div>
+                <div class="loading-preview"></div>
+              </div>
+            </div>
+          `;
+        }
+      }
+
+      function displayChats(platformName) {
+        const chats = mockChats[platformName] || [];
+        chatList.innerHTML = '';
+
+        if (chats.length === 0) {
+          chatList.innerHTML = `
+            <div class="empty-state">
+              <div class="empty-icon"><i class="fas fa-check-circle"></i></div>
+              <div class="empty-title">No pending chats</div>
+              <p>All conversations on ${platformName} are up to date</p>
+            </div>
+          `;
+          return;
+        }
+
+        chats.forEach((chat, index) => {
+          const chatItem = document.createElement('div');
+          chatItem.className = 'chat-item animate__animated animate__fadeInUp';
+          chatItem.style.animationDelay = `${index * 0.1}s`;
+
+          chatItem.innerHTML = `
+            <div class="chat-avatar"><i class="fas fa-user"></i></div>
+            <div class="chat-details">
+              <div class="chat-name">${chat.name}</div>
+              <div class="chat-preview">${chat.preview}</div>
+            </div>
+            <div class="chat-meta">
+              <div class="chat-time">${chat.time}</div>
+              ${chat.status === 'unread' ? '<div class="chat-status"></div>' : ''}
+            </div>
+          `;
+
+          chatItem.addEventListener('click', () => {
+            const chatHTML = `
+              <div class="p-4">
+                <h5 class="mb-3">${chat.name}</h5>
+                <div class="border rounded p-3 bg-white">
+                  <strong>Message:</strong>
+                  <p>${chat.preview}</p>
+                </div>
+                <div class="mt-3 text-muted">
+                  <small><i class="fas fa-clock me-1"></i>${chat.time}</small>
+                </div>
+              </div>
+            `;
+            chatContent.innerHTML = chatHTML;
+          });
+
+          chatList.appendChild(chatItem);
+        });
+      }
+
+      platformCards.forEach(card => {
+        card.addEventListener('click', () => {
+          platformCards.forEach(c => c.classList.remove('active'));
+          card.classList.add('active');
+
+          const platformName = card.dataset.platform;
+          contentTitle.textContent = `${platformName} Pending Chats`;
+
+          showLoadingState();
+          setTimeout(() => {
+            displayChats(platformName);
+          }, 500);
+        });
+      });
+
+      refreshBtn.addEventListener('click', () => {
+        const active = document.querySelector('.platform-card.active');
+        if (active) {
+          const platformName = active.dataset.platform;
+          showLoadingState();
+          setTimeout(() => {
+            displayChats(platformName);
+          }, 800);
+        } else {
+          location.reload();
+        }
+      });
+
+      filterBtn.addEventListener('click', () => {
+        alert('Filter functionality would be implemented here.');
+      });
+    });
+  </script>
+</body>
+</html>

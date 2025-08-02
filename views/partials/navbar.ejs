@@ -3,145 +3,332 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Navbar with Bootstrap</title>
-
+  <title>Modern Navbar with Bootstrap</title>
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <style>
-   /* Navbar container needs relative for highlight positioning */
-.navbar-nav {
-  position: relative;
-  display: flex;
-  gap: 10px;
-}
-.navbar {
-  background-color: rgba(255, 255, 255, 0.85) !important;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-}
-
-/* Highlight background */
-.navbar-nav::before {
-  content: '';
-  position: absolute;
-  bottom: 5px;
-  height: 35px;
-  background: #ffcc80;
-  border-radius: 20px;
-  transition: all 0.3s ease;
-  z-index: 0;
-  width: 0;
-  left: 0;
-}
-
-/* Individual link */
-.nav-link {
-  position: relative;
-  z-index: 1;
-  padding: 8px 18px !important;
-  border-radius: 20px;
-  transition: color 0.3s;
-}
-
-/* Active or hovered link triggers highlight */
-.nav-link:hover,
-.nav-link.active {
-  color: #000;
-}
-
-/* JavaScript will update this class to move highlight */
-.navbar-nav .highlight {
-  position: absolute;
-  bottom: 5px;
-  height: 35px;
-  background: #ffcc80;
-  border-radius: 20px;
-  transition: all 0.3s ease;
-  z-index: 0;
-}
-/* Show dropdown on hover */
-.nav-item.dropdown:hover .dropdown-menu {
-  display: block;
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-}
-
-/* Optional: smooth dropdown animation */
-.dropdown-menu {
-  display: block;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(10px);
-  transition: all 0.3s ease;
-  margin-top: 0;
-  border-radius: 8px;
-  pointer-events: auto;
-  z-index: 1000;
-}
+    :root {
+      --yale-blue: #134074;
+      --berkeley-blue: #13315c;
+      --oxford-blue: #0b2545;
+      --powder-blue: #8da9c4;
+      --mint-cream: #eef4ed;
+      --hover-highlight: var(--powder-blue);
+    }
+    
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    
+    /* Modern Navbar Styles */
+    .navbar {
+      background: linear-gradient(135deg, var(--yale-blue), var(--berkeley-blue)) !important;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+      padding: 15px 0;
+      transition: all 0.3s ease;
+    }
+    
+    .navbar-brand {
+      font-weight: 700;
+      font-size: 1.5rem;
+      color: white !important;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    
+    .navbar-brand i {
+      font-size: 1.8rem;
+    }
+    
+    /* Navbar container needs relative for highlight positioning */
+    .navbar-nav {
+      position: relative;
+      display: flex;
+      gap: 5px;
+    }
+    
+    /* Highlight background */
+    .navbar-nav::before {
+      content: '';
+      position: absolute;
+      bottom: 5px;
+      height: 35px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 20px;
+      transition: all 0.3s ease;
+      z-index: 0;
+      width: 0;
+      left: 0;
+    }
+    
+    /* Individual link */
+    .nav-link {
+      position: relative;
+      z-index: 1;
+      padding: 8px 18px !important;
+      border-radius: 20px;
+      transition: all 0.3s ease;
+      color: rgba(255, 255, 255, 0.8) !important;
+      font-weight: 500;
+      margin: 0 3px;
+    }
+    
+    /* Active or hovered link triggers highlight */
+    .nav-link:hover,
+    .nav-link.active {
+      color: white !important;
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+    
+    /* JavaScript will update this class to move highlight */
+    .navbar-nav .highlight {
+      position: absolute;
+      bottom: 5px;
+      height: 35px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 20px;
+      transition: all 0.3s ease;
+      z-index: 0;
+    }
+    
+    /* Dropdown styles */
+    .dropdown-menu {
+      background: white;
+      border: none;
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      padding: 10px 0;
+      margin-top: 10px;
+      min-width: 220px;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(15px);
+      transition: all 0.3s ease;
+      pointer-events: none;
+    }
+    
+    /* Show dropdown on hover with animation */
+    .nav-item.dropdown:hover .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+    
+    /* Dropdown item styles */
+    .dropdown-item {
+      padding: 10px 20px;
+      color: var(--oxford-blue);
+      font-weight: 500;
+      transition: all 0.3s ease;
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    
+    /* Animate dropdown items when dropdown is shown */
+    .nav-item.dropdown:hover .dropdown-item {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    
+    /* Staggered animation for dropdown items */
+    .dropdown-item:nth-child(1) { transition-delay: 0.05s; }
+    .dropdown-item:nth-child(2) { transition-delay: 0.1s; }
+    .dropdown-item:nth-child(3) { transition-delay: 0.15s; }
+    .dropdown-item:nth-child(4) { transition-delay: 0.2s; }
+    .dropdown-item:nth-child(5) { transition-delay: 0.25s; }
+    .dropdown-item:nth-child(6) { transition-delay: 0.3s; }
+    .dropdown-item:nth-child(7) { transition-delay: 0.35s; }
+    
+    .dropdown-item:hover {
+      background-color: var(--mint-cream);
+      color: var(--yale-blue);
+    }
+    
+    .dropdown-item i {
+      margin-right: 10px;
+      color: var(--powder-blue);
+      width: 20px;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+    
+    .dropdown-item:hover i {
+      color: var(--yale-blue);
+      transform: translateX(3px);
+    }
+    
+    /* Dropdown toggle arrow animation */
+    .dropdown-toggle::after {
+      transition: transform 0.3s ease;
+    }
+    
+    .nav-item.dropdown:hover .dropdown-toggle::after {
+      transform: rotate(180deg);
+    }
+    
+    /* Navbar toggler */
+    .navbar-toggler {
+      border: none;
+      padding: 5px 10px;
+      outline: none;
+    }
+    
+    .navbar-toggler:focus {
+      box-shadow: none;
+    }
+    
+    .navbar-toggler-icon {
+      background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.8%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+    }
+    
+    /* Mobile responsive adjustments */
+    @media (max-width: 991px) {
+      .navbar-collapse {
+        background: linear-gradient(135deg, var(--yale-blue), var(--berkeley-blue));
+        border-radius: 12px;
+        padding: 15px;
+        margin-top: 10px;
+      }
+      
+      .navbar-nav {
+        flex-direction: column;
+        gap: 5px;
+      }
+      
+      .nav-link {
+        padding: 10px 15px !important;
+        border-radius: 8px;
+      }
+      
+      .dropdown-menu {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        margin-left: 15px;
+        margin-top: 5px;
+        position: static;
+        box-shadow: none;
+        transform: none;
+        opacity: 1;
+        visibility: visible;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+      }
+      
+      .dropdown-item {
+        color: white;
+        padding: 8px 15px;
+      }
+      
+      .dropdown-item:hover {
+        background: rgba(255, 255, 255, 0.2);
+      }
+      
+      .nav-item.dropdown:hover .dropdown-menu {
+        max-height: 500px;
+      }
+      
+      .dropdown-item {
+        opacity: 1;
+        transform: none;
+        transition: none;
+      }
+    }
+    
+    /* Add subtle animation to navbar brand */
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+    
+    .navbar-brand:hover i {
+      animation: pulse 1.5s infinite;
+    }
+    
+    /* Add floating animation to dropdown */
+    @keyframes float {
+      0% { transform: translateY(0px); }
+      50% { transform: translateY(-5px); }
+      100% { transform: translateY(0px); }
+    }
+    
+    .nav-item.dropdown:hover .dropdown-menu {
+      animation: float 3s ease-in-out infinite;
+    }
   </style>
 </head>
-
 <body>
-
 <!-- Navbar -->
-<nav class="navbar navbar-expand-lg navbar-light bg-white shadow-sm py-3 sticky-top">
+<nav class="navbar navbar-expand-lg navbar-light sticky-top">
   <div class="container">
-    <a class="navbar-brand" href="/">MyCompany</a>
+    <a class="navbar-brand" href="/">
+      <i class="fas fa-headset"></i>
+      OnCall
+    </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
       aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav ms-auto">
-
         <li class="nav-item">
-          <a class="nav-link" href="/about">About us</a>
+          <a class="nav-link" href="/about">
+            <i class="fas fa-info-circle"></i> About us
+          </a>
         </li>
-
         <li class="nav-item">
-          <a class="nav-link" href="/#why">Why us</a>
+          <a class="nav-link" href="#carouselSections" >
+            <i class="fas fa-question-circle"></i> Why us
+          </a>
         </li>
-
         <li class="nav-item">
-          <a class="nav-link" href="/#solutions">Solutions</a>
+          <a class="nav-link" href="#solutions-section" >
+            <i class="fas fa-lightbulb"></i> Solutions
+          </a>
         </li>
-
         <!-- Industries Dropdown -->
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="industriesDropdown" role="button"
             data-bs-toggle="dropdown" aria-expanded="false">
-            Industries
+            <i class="fas fa-industry"></i> Industries
           </a>
           <ul class="dropdown-menu" aria-labelledby="industriesDropdown">
-            <li><a class="dropdown-item" href="/ecommerce">Ecommerce</a></li>
-            <li><a class="dropdown-item" href="/government">Government & Public Services</a></li>
-            <li><a class="dropdown-item" href="/realestate">Real Estate</a></li>
-            <li><a class="dropdown-item" href="/medical">Medical Services</a></li>
-            <li><a class="dropdown-item" href="/fastfood">Fast Food</a></li>
-            <li><a class="dropdown-item" href="/travel">Travel & Tourism</a></li>
-            <li><a class="dropdown-item" href="/facility">Facility Management</a></li>
+            <li><a class="dropdown-item" href="/ecommerce"><i class="fas fa-shopping-cart"></i> Ecommerce</a></li>
+            <li><a class="dropdown-item" href="/government"><i class="fas fa-landmark"></i> Government & Public Services</a></li>
+            <li><a class="dropdown-item" href="/realestate"><i class="fas fa-building"></i> Real Estate</a></li>
+            <li><a class="dropdown-item" href="/medical"><i class="fas fa-hospital"></i> Medical Services</a></li>
+            <li><a class="dropdown-item" href="/fastfood"><i class="fas fa-hamburger"></i> Fast Food</a></li>
+            <li><a class="dropdown-item" href="/travel"><i class="fas fa-plane"></i> Travel & Tourism</a></li>
+            <li><a class="dropdown-item" href="/facility"><i class="fas fa-cogs"></i> Facility Management</a></li>
           </ul>
         </li>
-
         <!-- Packages Dropdown -->
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="packagesDropdown" role="button"
             data-bs-toggle="dropdown" aria-expanded="false">
-            Packages
+            <i class="fas fa-box"></i> Packages
           </a>
           <ul class="dropdown-menu" aria-labelledby="packagesDropdown">
-            <li><a class="dropdown-item" href="/inbound">Inbound Calls</a></li>
-            <li><a class="dropdown-item" href="/digital">Digital</a></li>
+            <li><a class="dropdown-item" href="/inbound"><i class="fas fa-phone-alt"></i> Inbound Calls</a></li>
+            <li><a class="dropdown-item" href="/digital"><i class="fas fa-laptop"></i> Digital</a></li>
           </ul>
         </li>
-
         <li class="nav-item">
-          <a class="nav-link" href="/contact">Contact</a>
+          <a class="nav-link" href="/contact">
+            <i class="fas fa-envelope"></i> Contact
+          </a>
         </li>
-
       </ul>
     </div>
   </div>
@@ -149,29 +336,25 @@
 
 <!-- Bootstrap JS Bundle -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-
-</body>
-</html>
 <script>
   document.addEventListener("DOMContentLoaded", function () {
     const links = document.querySelectorAll(".nav-link");
     const nav = document.querySelector(".navbar-nav");
-
     const highlight = document.createElement("div");
     highlight.classList.add("highlight");
     nav.appendChild(highlight);
-
+    
     function moveHighlight(link) {
       const rect = link.getBoundingClientRect();
       const navRect = nav.getBoundingClientRect();
       highlight.style.width = `${rect.width}px`;
       highlight.style.left = `${rect.left - navRect.left}px`;
     }
-
+    
     // Move to active link on load
     const active = document.querySelector(".nav-link.active") || links[0];
     moveHighlight(active);
-
+    
     links.forEach(link => {
       link.addEventListener("mouseenter", () => moveHighlight(link));
       link.addEventListener("click", () => {
@@ -180,21 +363,118 @@
         moveHighlight(link);
       });
     });
-
+    
     window.addEventListener("resize", () => {
       const current = document.querySelector(".nav-link.active");
       if (current) moveHighlight(current);
     });
-  });
-  // Disable Bootstrap dropdown toggle on click for hover items
-  document.addEventListener('DOMContentLoaded', function () {
+    
+    // Disable Bootstrap dropdown toggle on click for hover items
     const hoverDropdowns = ['industriesDropdown', 'packagesDropdown'];
-
     hoverDropdowns.forEach(id => {
       const trigger = document.getElementById(id);
       if (trigger) {
         trigger.removeAttribute('data-bs-toggle');
       }
     });
+    
+    // Handle anchor links for "Why Us" and "Solutions"
+    function handleAnchorLinks() {
+      // Get the current page path
+      const currentPath = window.location.pathname;
+      const isHomePage = currentPath === '/' || currentPath === '/index.html';
+      
+      // Handle Why Us link
+      const whyLink = document.getElementById('whyLink');
+      if (whyLink) {
+        whyLink.addEventListener('click', function(e) {
+          e.preventDefault();
+          
+          if (isHomePage) {
+            // If on home page, scroll to the section
+            const whySection = document.getElementById('why');
+            if (whySection) {
+              window.scrollTo({
+                top: whySection.offsetTop - 80,
+                behavior: 'smooth'
+              });
+            } else {
+              // If section doesn't exist, navigate to home page with anchor
+              window.location.href = '/#why';
+            }
+          } else {
+            // If not on home page, navigate to home page with anchor
+            window.location.href = '/#why';
+          }
+        });
+      }
+      
+      // Handle Solutions link
+      const solutionsLink = document.getElementById('solutionsLink');
+      if (solutionsLink) {
+        solutionsLink.addEventListener('click', function(e) {
+          e.preventDefault();
+          
+          if (isHomePage) {
+            // If on home page, scroll to the section
+            const solutionsSection = document.getElementById('solutions');
+            if (solutionsSection) {
+              window.scrollTo({
+                top: solutionsSection.offsetTop - 80,
+                behavior: 'smooth'
+              });
+            } else {
+              // If section doesn't exist, navigate to home page with anchor
+              window.location.href = '/#solutions';
+            }
+          } else {
+            // If not on home page, navigate to home page with anchor
+            window.location.href = '/#solutions';
+          }
+        });
+      }
+    }
+    
+    // Call the function to handle anchor links
+    handleAnchorLinks();
+    
+    // Add smooth scroll behavior for other anchor links
+    document.querySelectorAll('a[href^="#"]:not(#whyLink):not(#solutionsLink)').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const targetId = this.getAttribute('href').substring(1);
+        const target = document.getElementById(targetId);
+        if (target) {
+          window.scrollTo({
+            top: target.offsetTop - 80,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+    
+    // Add animation to dropdown items on mobile
+    if (window.innerWidth <= 991px) {
+      const dropdownToggles = document.querySelectorAll('.dropdown-toggle');
+      dropdownToggles.forEach(toggle => {
+        toggle.addEventListener('click', function(e) {
+          e.preventDefault();
+          const dropdownMenu = this.nextElementSibling;
+          const isOpen = dropdownMenu.style.maxHeight && dropdownMenu.style.maxHeight !== '0px';
+          
+          // Close all dropdowns
+          document.querySelectorAll('.dropdown-menu').forEach(menu => {
+            menu.style.maxHeight = '0';
+          });
+          
+          // Open clicked dropdown if it was closed
+          if (!isOpen) {
+            dropdownMenu.style.maxHeight = dropdownMenu.scrollHeight + 'px';
+          }
+        });
+      });
+    }
   });
 </script>
+</body>
+</html>
