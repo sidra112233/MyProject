@@ -97,50 +97,97 @@ app.get('/inbound/calls', (req, res) => {
         res.json(results);
     });
 });
-// Renders the EJS frontend at /customers
-app.get('/customers', (req, res) => {
-    res.render('customers/list');
+app.get('/customers/list', (req, res) => {
+    const { industry, search, start_date, end_date } = req.query;
+
+    let query = `
+        SELECT company_name, industry, did_number,
+               DATE_FORMAT(added_on, '%d %b, %Y') as added_on
+        FROM list WHERE 1=1`;
+    let params = [];
+
+    if (industry) {
+        query += ` AND industry = ?`;
+        params.push(industry);
+    }
+    if (search) {
+        query += ` AND company_name LIKE ?`;
+        params.push(`%${search}%`);
+    }
+    if (start_date) {
+        query += ` AND added_on >= ?`;
+        params.push(start_date);
+    }
+    if (end_date) {
+        const endDatePlusOne = new Date(end_date);
+        endDatePlusOne.setDate(endDatePlusOne.getDate() + 1);
+        const formattedEndDate = endDatePlusOne.toISOString().split('T')[0];
+        query += ` AND added_on < ?`;
+        params.push(formattedEndDate);
+    }
+
+    db.query(query, params, (err, results) => {
+        if (err) {
+            console.error("Database error:", err);
+            return res.status(500).send('Database error');
+        }
+        // Render EJS template instead of sending raw JSON
+        res.render('customers/list', { customers: results, user: req.session.user });
+    });
 });
 
-// Returns JSON data for the dashboard via fetch
-app.get('/customers/list', async (req, res) => {
+
+app.get('/chats/dashboard', async (req, res) => {
     try {
-        const { industry, search, start_date, end_date } = req.query;
-        let query = `
-          SELECT company_name, industry, did_number,
-                 DATE_FORMAT(added_on, '%d %b, %Y') as added_on
-          FROM list WHERE 1=1`;
-        let params = [];
+        const [rows] = await db.promise().query(`
+      SELECT 
+        platform,
+        COUNT(*) as count 
+      FROM chatsdashboard
+      WHERE status = 'pending'
+      GROUP BY platform
+    `);
 
-        if (industry) {
-            query += ` AND industry = ?`;
-            params.push(industry);
-        }
-        if (search) {
-            query += ` AND company_name LIKE ?`;
-            params.push(`%${search}%`);
-        }
-        if (start_date) {
-            query += ` AND added_on >= ?`;
-            params.push(start_date);
-        }
-        if (end_date) {
-            const endDatePlusOne = new Date(end_date);
-            endDatePlusOne.setDate(endDatePlusOne.getDate() + 1);
-            const formattedEndDate = endDatePlusOne.toISOString().split('T')[0];
-            query += ` AND added_on < ?`;
-            params.push(formattedEndDate);
-        }
+        const platforms = {
+            Facebook: 0,
+            Instagram: 0,
+            Whatsapp: 0,
+            WBWhatsapp: 0,
+            WebChats: 0,
+            Outlook: 0,
+            Gmail: 0,
+        };
 
-        console.log("Executing query:", query);
-        console.log("With parameters:", params);
+        rows.forEach(row => {
+            platforms[row.platform] = row.count;
+        });
 
-        const [results] = await db.query(query, params);
-        res.json(results);  // Send JSON to frontend
+        res.render('chats/dashboard', {
+            platforms,
+            user:req.session.user
+        });
     } catch (err) {
-        console.error("Database error:", err);
-        res.status(500).json({ error: 'Database error', details: err.message });
+        console.error(err);
+        res.status(500).send('Failed to load chat data');
     }
+});
+app.post('/webhook', express.json(), (req, res) => {
+    const data = req.body;
+
+    if (data.entry) {
+        data.entry.forEach(entry => {
+            const changes = entry.changes;
+            changes.forEach(change => {
+                const messageData = change.value?.messages?.[0];
+                if (messageData) {
+                    // Save to DB (you can push it to memory or DB for dashboard)
+                    console.log("New message from WhatsApp:", messageData.text.body);
+                }
+            });
+        });
+    }
+
+    res.sendStatus(200);
 });
 
 const PORT = 3000;
